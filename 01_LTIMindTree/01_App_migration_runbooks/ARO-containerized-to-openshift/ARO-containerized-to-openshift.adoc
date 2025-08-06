@@ -31,6 +31,18 @@
 <<5. 실행>>
 
 * <<5.1 OpenShift 웹 콘솔, DockerFile 전략(수동), DockerHub 이미지 사용 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
+* <<5.2 ARO에서 컨테이너화됨 앱을 위한 마이그레이션 단계, OpenShift 웹 콘솔 사용, Docklerfile 전략(수동), Azure Container Registry(ACR) 이미지 사용>>
+* <<5.3 OpenShift 웹 콘솔을 사용한 ARO 컨테이너화 앱 마이그레이션 단계, S2I(Source-to-Image) 전략(수동)>>
+* <<5.4 OpenShift(OC) 명령줄을 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
+
+<<6. DevOps 파이프라인>>
+
+* <<6.1 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱의 마이그레이션 단계(수동 트리거)>>
+* <<6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub 웹훅)>>
+* <<6.3 GibHub Actions를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
+* <<6.4 Azure DevOps를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
+
+<<7. 부록>>
 
 == 1. 소개
 
