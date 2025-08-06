@@ -30,15 +30,15 @@
 
 <<5. 실행>>
 
-* <<5.1 OpenShift 웹 콘솔, DockerFile 전략(수동), DockerHub 이미지 사용 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
-* <<5.2 ARO에서 컨테이너화됨 앱을 위한 마이그레이션 단계, OpenShift 웹 콘솔 사용, Docklerfile 전략(수동), Azure Container Registry(ACR) 이미지 사용>>
-* <<5.3 OpenShift 웹 콘솔을 사용한 ARO 컨테이너화 앱 마이그레이션 단계, S2I(Source-to-Image) 전략(수동)>>
+* <<5.1 OpenShift 웹 콘솔&#44; DockerFile 전략(수동)&#44; DockerHub 이미지 사용 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
+* <<5.2 ARO에서 컨테이너화됨 앱을 위한 마이그레이션 단계&#44; OpenShift 웹 콘솔 사용&#44; Docklerfile 전략(수동)&#44; Azure Container Registry(ACR) 이미지 사용>>
+* <<5.3 OpenShift 웹 콘솔을 사용한 ARO 컨테이너화 앱 마이그레이션 단계&#44; S2I(Source-to-Image) 전략(수동)>>
 * <<5.4 OpenShift(OC) 명령줄을 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
 
 <<6. DevOps 파이프라인>>
 
 * <<6.1 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱의 마이그레이션 단계(수동 트리거)>>
-* <<6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub webhook)>>
+* <<6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거&#44; GitHub webhook)>>
 * <<6.3 GibHub Actions를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
 * <<6.4 Azure DevOps를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
 
@@ -50,7 +50,7 @@
 
 === 1.1 Azure RedHat OpenShift(ARO)
 
-Azure RedHat OpenShift는 Microsoft와 Red Hat이 공동으로 모니터링 및 운영하는 주문성 고가용성 완전 관리형 OpenShift 클러스터를 제공합니다. Kuberneters는 Red Hat OpenShift의 핵심입니다. OpeenShift는 Kubernetees를 보완하는 부가가치 기능을 제공하여 개발자 및 운영자 기능을 크게 개선한 턴키 PaaS(Container Platform as a Service)로 만듭니다.
+Azure RedHat OpenShift는 Microsoft와 Red Hat이 공동으로 모니터링 및 운영하는 주문성 고가용성 완전 관리형 OpenShift 클러스터를 제공합니다. Kuberneters는 Red Hat OpenShift의 핵심입니다. OpeenShift는 Kubernetees를 보완하는 부가가치 기능을 제공하여 개발자 및 운영자 기능을 크게 개선한 턴키 PaaS(Container Platform as a Service)로 만듭니다. &#8217;
 
 다음은 ARO의 주요 기능입니다.
 
@@ -111,7 +111,7 @@ image:./images/image01.png[]
 
 == 5. 실행
 
-=== 5.1 OpenShift 웹 콘솔, DockerFile 전략(수동), DockerHub 이미지 사용 ARO에서 컨테이너화 된 앱의 마이그레이션 단계
+=== 5.1 OpenShift 웹 콘솔&#44; DockerFile 전략(수동)&#44; DockerHub 이미지 사용 ARO에서 컨테이너화 된 앱의 마이그레이션 단계
 
 1. OpenShift 클러스터에 로그인하고 "Administration" 화면으로 이동합닏다.
 2. 아직 생성되지 않은 경우 프로젝트 네임스페이스를 만듭니다.
@@ -156,7 +156,7 @@ image:./images/image09.png[]
 +
 image:./images/image10.png[]
 
-=== 5.2 ARO에서 컨테이너화됨 앱을 위한 마이그레이션 단계, OpenShift 웹 콘솔 사용, Docklerfile 전략(수동), Azure Container Registry(ACR) 이미지 사용
+=== 5.2 ARO에서 컨테이너화됨 앱을 위한 마이그레이션 단계&#44; OpenShift 웹 콘솔 사용&#44; Docklerfile 전략(수동)&#44; Azure Container Registry(ACR) 이미지 사용
 
 Azure Container Registry(ACR)는 지리적 복제와 같은 엔터프라이즈 기능을 갖춘 프라이빗 Docker 컨테이너 이미지를 저장하는 데 사용할 수 있는 관리형 컨테이너 레지스트리 서비스입니다. ARO 클러스터에서 ARO에 액세스하려면 클러스터가 Kubernetes 시크릿에 Docker 로그인 자격 증명을 저장하여 ACR에 인증해야 합니다.
 
@@ -215,7 +215,7 @@ image:./images/image13.png[]
 +
 image:./images/image14.png[]
 
-=== 5.3 OpenShift 웹 콘솔을 사용한 ARO 컨테이너화 앱 마이그레이션 단계, S2I(Source-to-Image) 전략(수동)
+=== 5.3 OpenShift 웹 콘솔을 사용한 ARO 컨테이너화 앱 마이그레이션 단계&#44; S2I(Source-to-Image) 전략(수동)
 
 1. 이 접근 방식은 DockerFile을 사용하지 않고도, 즉 앱을 컨테이너화 하지 않고도 작동합니다. 이 전략은 소스를 이해하고 대상 언어와 운영체제를 이해하여 이미지를 만드는 방식으로 작동합니다.
 +
@@ -436,7 +436,7 @@ image:./images/image46.png[]
 +
 image:./images/image47.png[]
 
-=== 6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub webhook)
+=== 6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거&#44; GitHub webhook)
 
 1. 파이프라인과 결합된 트리거를 사용하면 파이프라인을 연결하여 외부 GitHub 이벤트(푸시 이벤트, 풀 리퀘스트 등)에 응답할 수 있습니다.
 2. 이를 위한 전제 조건은 웹훅을 사용하기 위해 프로젝트에 Trigger Template, TriggerBinding, EventListener를 정의해야 한다는 것입니다.
