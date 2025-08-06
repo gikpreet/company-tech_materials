@@ -38,7 +38,7 @@
 <<6. DevOps 파이프라인>>
 
 * <<6.1 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱의 마이그레이션 단계(수동 트리거)>>
-* <<6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub 웹훅)>>
+* <<6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub webhook)>>
 * <<6.3 GibHub Actions를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
 * <<6.4 Azure DevOps를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
 
@@ -436,7 +436,7 @@ image:./images/image46.png[]
 +
 image:./images/image47.png[]
 
-=== 6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub 웹훅)
+=== 6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub webhook)
 
 1. 파이프라인과 결합된 트리거를 사용하면 파이프라인을 연결하여 외부 GitHub 이벤트(푸시 이벤트, 풀 리퀘스트 등)에 응답할 수 있습니다.
 2. 이를 위한 전제 조건은 웹훅을 사용하기 위해 프로젝트에 Trigger Template, TriggerBinding, EventListener를 정의해야 한다는 것입니다.
