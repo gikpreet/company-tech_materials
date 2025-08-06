@@ -17,6 +17,21 @@
 
 == 목차
 
+<<1. 소개>>
+
+* <<1.1 Azure RedHat OpenShift(ARO)>>
+* <<1.2 참조 아키텍처>>
+
+<<2. 역할과 책임>>
+
+<<3. 계획>>
+
+<<4. 전제 조건>>
+
+<<5. 실행>>
+
+* <<5.1 OpenShift 웹 콘솔, DockerFile 전략(수동), DockerHub 이미지 사용 ARO에서 컨테이너화 된 앱의 마이그레이션 단계>>
+
 == 1. 소개
 
 이 문서에서는 ARO(Azure RedHat OpenShift)에 대한 간략한 소개, ARO 마이그레이션을 위한 필수 구성 요소 및 샘플 컨테이너화 된 애플리케이션을 ARO 클러스터로 마이그레이션하는 자세한 절차/단계를 제공합니다.
@@ -296,10 +311,12 @@ image:./images/image34.png[]
 +
 다음과 같이 구성합니다.
 +
+----
 * Display Name: fetch
 * Parameters->url : $(params.APP_GIT_REPO)
 * Parameter->revision : $(params.GIT_REVISION)
 * Workspaces->output : shared-workspace
+----
 +
 다른 값은 기본값으로 둡니다. 이 작업의 구성을 종료하려면 바깥쪽 아무 곳이나 클릭합니다.
 +
@@ -309,15 +326,15 @@ image:./images/image35.png[]
 +
 `fetch` 작업에 마우스를 올리고 오른쪽에 있는 파란색 `+` 기호를 클릭합니다. 그러면 다른 작업이 추가됩니다. 새로운 `Add Task` 버튼을 클릭하고 필터에 `S2I dotnet` 을 입력합니다. Red Hat에서 해당 옵션을 선택하고 `Add` 를 클릭합니다. 작업을 다시 클릭하여 작업 구성을 열고 아래와 같이 설정합니다.
 +
+----
 * Display name: build
 * Parameters-> Image :
-+
-----
-image-registry openshift-image-registry.svc:5000/$(params.PROJECT_NAME)/$(params.APP_NAME):dev
-----
-+
+
+  image-registry openshift-image-registry.svc:5000/$(params.PROJECT_NAME)/$(params.APP_NAME):dev
+
 * Add environment variable - DOTNET_STARTUP_PROJECT=aro-sample-project/aro-sample-project.csproj
 * Workspaces->source : shared-workspace
+----
 +
 다른 값은 기본으로 둡니다. 이 작업의 구성을 종료하려면 바깥쪽 아무 곳이나 클릭합니다.
 +
@@ -329,11 +346,635 @@ image:./images/image37.png[]
 +
 `build` 작업에 마우스를 올리고 오른쪽에 있는 파란색 `+` 기호를 클릭합니다. 그러면 다른 작업이 추가됩니다. 새로운 `Add Task` 버튼을 클릭하고 필터에 `OpenShift Client` 를 입력합니다. Red Hat에서 옵션을 선택하고 `Add` 를 클릭합니다. `Task` 를 다시 클릭하여 작업 구성을 열고 아래와 같이 설정합니다.
 +
+----
 * Display Name: cleanup-old-deployment
 * Parameters->Script :
+
+  oc delete all -l app=$(params.APP_NAME)
+----
++
+image:./images/image38.png[]
++
+다른 값은 기본으로 둡니다. 이 작업의 구성을 종료하려면 바깥쪽 아무 곳이나 클릭합니다.
++
+**Task 4: 빌드된 코드 배포**
++
+`cleanup-old-deployment` 작업에 마우스를 올리고 오른쪽에 있는 파란색 `+` 기호를 클릭합니다. 그러면 다른 작업에 추가됩니다. 새로 생성된 'Add Task' 버튼을 클릭하고 필터에 `OpenShift Client` 를 입력하세요. Red Hat에서 해당 옵션을 선택하고 `Add` 버튼을 클릭합니다. `Task` 를 다시 클릭하여 작업 구성을 열고 아래와 같이 설정하세요.
 +
 ----
-oc delete all -l app=$(params.APP_NAME)
+* Display Name: deploy-code
+* Parameters->SCRIPT
+
+  oc new-app --name $(params.APP_NAME) --as-deployment-config image-registry.openshift-image-registry.svc:5000/$(params.PROJECT_NAME)/$(params.APP_NAME):dev --context-dir=aro-sample-project
+
 ----
 +
 다른 값은 기본으로 둡니다. 이 작업의 구성을 종료하려면 바깥쪽 아무 곳이나 클릭합니다.
++
+image:./images/image39.png[]
++
+**Task 5: 경로상의 서비스 노출**
++
+`deploy` 작업에 마우스를 올리고 오른쪽에 있는 파란색 `+` 기호를 클릭합니다. 그러면 다른 작업이 추가됩니다. 새로운 `Add Task` 버튼을 클릭하고 필터에 `OpenShift Client` 를 입력합니다. Red Hat에서 옵션을 선택하고 `Add` 를 클릭합니다. 작업을 다시 클릭하여 작업 구성을 열고 아래와 같이 설정합니다.
++
+----
+* Display Name: expose-service
+* Parameters->SCRIPT:
+
+  oc expose svc $(params.APP_NAME)
+----
++
+다른 값은 기본 값으로 둡니다. 이 작업의 구성을 종료하려면 바깥쪽 아무 곳이나 클릭합니다.
++
+image:./images/image40.png[]
++
+image:./images/image41.png[]
++
+**Task 6: 배포 확인**
++
+`expose-service` 작업에 마우스를 올리고 오른쪽에 있는 파란색 `+` 기호를 클릭합니다. 그러면 다른 작업이 추가됩니다. 새로 생성된 `Add Task` 버튼을 클릭하고 필터에 `OpenShift Client` 를 입력합니다. Red Hat에서 해당 옵션을 선택하고 `Add` 를 클릭합니다. 작업을 다시 클릭하여 작업 구성을 열고 아래와 같이 설정합니다.
++
+----
+* Display Name: verify-rollout
+* Parameters->SCRIPT :
+
+  oc rollout status dc/$(params.APP_NAME)
+----
++
+다른 값은 기본 값으로 둡니다. 이 작업의 구성을 종료하려면 바깥쪽 아무 곳이나 클릭합니다. 파이프라인을 생성하려면 파란색 'Create' 버튼을 클릭합니다.
++
+image:./images/image42.png[]
++
+GitHub 저장소에 변경 사항을 커밋하고 파이프라인을 실행하여 변경 사항을 확인합니다.
++
+image:./images/image43.png[]
+
+7. 파이프라인을 수동으로 트리거합니다.
+8. `Administration` 보기로 이동하여 파이프라인으로 이동합니다. 점 세개로 표시된 버거 메뉴를 선택하고 `Start` 를 클릭합니다.
++
+image:./images/image44.png[]
++
+9. 파라미터를 검토하고 파이프라인을 실행할 PVC(Persistent Volume Claim)를 선택합니다. `Start` 를 클릭합니다.
++
+image:./images/image45.png[]
++
+10. workload, Pod, Service 및 routes를 검토합니다. route path를 클릭하여 애플리케이션에 액세스합니다.
++
+image:./images/image46.png[]
++
+image:./images/image47.png[]
+
+=== 6.2 OpenShift 내장 Tekton 파이프라인을 사용하여 ARO에서 컨테이너화된 앱을 마이그레이션하는 단계(자동 트리거, GitHub 웹훅)
+
+1. 파이프라인과 결합된 트리거를 사용하면 파이프라인을 연결하여 외부 GitHub 이벤트(푸시 이벤트, 풀 리퀘스트 등)에 응답할 수 있습니다.
+2. 이를 위한 전제 조건은 웹훅을 사용하기 위해 프로젝트에 Trigger Template, TriggerBinding, EventListener를 정의해야 한다는 것입니다.
+3. 웹훅과 연결될 GitHub-secret을 생성합니다. `webhook-secret.yaml` 파일을 생성합니다.
++
+----
+webhook-secret.yml:
+-------------------
+
+apiVersion: v1
+kind: Secret
+metadata:
+name: webhook-secret
+namespace: cmf-pipeline-project
+stringData:
+secretToken: sample-secret
+----
++ 
+4. Secret을 적용합니다.
++
+----
+oc apply -f webhook-secret.yaml
+----
+5. 이제 TriggerTemplte을 정의합니다. TriggerTemplate은 템플릿 리소스 내 어디에서나 대체될 수 있는 파라미터를 가진 리소스입니다. `github-template.yaml` 파일을 생성합니다.
++
+----
+github-template.yml:
+--------------------
+
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+name: github-template
+spec:
+params:
+    - name: gitrevision
+    description: The git revision
+    default: main
+    - name: gitrepositoryurl
+    description: The git repository URL
+resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+        generateName: github-pipelinerun-
+    spec:
+        pipelineRef:
+        name: aro-dotnet-builder-pipeline
+        workspaces:
+        - name: shared-workspace
+            persistentVolumeClaim:
+            claimName: my-sample-app-tekton-pvc
+        params:
+        - name: gitrevision
+            value: $(params.gitrevision)
+        - name: gitrepositoryurl
+            value: $(params.gitrepositoryurl)
+----
++
+6. 템플랫을 적용합니다.
++
+----
+oc apply -f github-template.yaml
+----
++
+7. 다음 단계는 이벤트에서 필드를 캡처하고 파라미트로 저장한 다음 이벤트가 발생할 때 마다 TriggerTemplate에서 이를 바꿀수 있는 TriggerBinding을 만드는 것입니다. +
+`github-binding.yaml` 파일을 만들고 동일하게 적용합니다.
++
+----
+github-binding.yaml:
+-------------------
+
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+name: github-binding
+spec:
+params:
+    - name: gitrevision
+    value: $(body.head_commit.id)
+    - name: gitrepositoryurl
+    value: $(body.repository.clone_url)
+----
++
+----
+oc apply -f github-binding.yaml        
+----
++
+8. 마지막으로 EventListener를 만듭니다. 이 컴포넌트는 Service를 설정하고 이벤트를 수신합니다. 또한 TriggerTemplate을 TriggerBinding에 연결하여 주소 지정 가능한 엔드포인트(이벤트 싱크)로 전달합니다.
++
+`github-listener.yaml` 파일을 만들고 동일하게 적용합니다.
++
+----
+github-listener.yaml:
+--------------------
+
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+name: github-listener
+spec:
+serviceAccountName: pipeline
+triggers:
+    - name: github-trigger
+    interceptors:
+        - ref:
+            name: "github"
+        params:
+            - name: secretRef
+            value:
+                secretKey: secretToken
+                secretName: webhook-secret
+    bindings:
+        - ref: github-binding
+    template:
+        ref: github-template
+----
++
+----
+oc apply -f github-listener.yaml
+----
++
+9. 아래 명령을 실행하여 eventListener 서비스를 경로로 노출합니다.
++
+----
+oc expose svc el-github-listener
+----
++
+10. 다음 단계는 GitHub 저장소에서 웹훅을 구성하는 것입니다.
+* GitHub 저장소에서:
+** `Settings` -> 'WebHooks' 로 이동합니다.
+** `Add webhook` 을 클릭합니다.
+** `oc expose` 명령으로 생성된 경로 URL로 페이로드 URL을 설정합니다.
+** `Content type` 을 `application/Json` 으로 설정합니다.
+** `Secret` 아래에 비밀 토큰을 추가합니다. (webhook-secret.yaml에서 사용한 토큰과 동일)
+** webhook을 트리거해야 하는 이벤트를 선택합니다. (예: 푸시 이벤트)
+** `Add webhook` 을 클릭합니다.
++
+image:./images/image48.png[]
++
+11. 설정을 테스트하고 Github 저장소에 변경 사항을 푸시하면 모든 푸시 이벤트에 대해 파이프라인이 자동으로 시작됩니다.
++
+image:./images/image49.png[]
+
+=== 6.3 GibHub Actions를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계
+
+GitHub Actions는 모든 GitHub 저장소에서 사용할 수 있는 이벤트 기반 자동화 작업입니다. 이벤트는 작업을 포함하는 워크플로를 자동으로 트리거합니다. 그러면 작업은 단계를 사용하여 작업 실행 순서를 제어합니다. 이러한 작업은 소프트웨어 빌드, 테스트 및 배포를 자동화하는 명령입니다. 이 장에서는 샘플 .NET Core 백엔드 컨테이너 이미지를 빌드하고 docker-hub 레지스트리에 푸시하기 위한 GitHub Action을 추가합니다. +
+참고: GitHub Azure 컨테이너 레지스트리 등 다른 컨테이너 레지스트리도 사용할 수 있습니다.
+
+==== 1) OpenShift 프로젝트 생성
+
+`Administrator` 관점으로 이동하여 새 프로젝트를 만듭니다.
+
+image:./images/image50.png[]
+
+==== 2) GitHub Action 구성
+
+GitHub Actions 워크플로는 환경으로 실행되며, 해당 환경의 보호 규칙과 비밀을 사용하기 위해 환경을 참조할 수 있습니다. 이 단계에서는 development라는 이름의 새 환경을 추가합니다. 이전에 GibHub에서 포크한 `aro-sample-project` 저장소에서 오른쪽 상단 메뉴로 이동하여 설정을 클릭합니다. 그런 다음 왼쪽 메뉴에서 `Environment` 를 클릭하고 오른쪽에서 `new environment` 를 클릭합니다.
+
+image:./images/image51.png[]
+
+==== 3) GitHub 환경 설정
+
+다음 창에서 이름에 사용할 GitHub 환경의 이름을 삽입합니다.
+
+Action: **development**
+
+`Configure environment` 를 클릭하여 환경 구성을 생성합니다.
+
+image:./images/image52.png[]
+
+==== 4) Github Secret
+
+방금 생성한 GitHub 환경 development의 결과 화면에서 새로 생성된 환경의 모든 세부 정볼르 확인할 수 있습니다. 섹션 하단의 `Environment Secret` 로 이동하고 'Add Secret' 를 클릭하여 새 Secret을 추가합니다.
+
+이제 GitHub Action에서 OpenShift 클러스터에 연결하는데 사용할 두 개의 Secret을 구성합니다.
+
+* OPENSHIFT_SERVER: The OpenShift API server
+* OPENSHIFT_TOKEN: The authentication token to connect with
+* IMAGE_REGISTRY_PASSWORD: Docker hub token
+
+image:./images/image53.png[]
+
+==== 5) Action 추가
+
+이제 GitHub Action과 OpenShift를 사용하여 자동화를 시작할 준비가 되었습니다. GitHub Action의 워크플로와 작업은 필요한 모든 단계가 포함된 YAML 파일로 정의됩니다.
+
+1. GitHub에서 `sample-dotnet-application` 백엔드 빌드를 트리거하는데 사용되는 다음 워크플로를 검토합니다.
+2. GitHub에서 OpenShift 스타터 템플릿을 선택하고 워크플로를 트리거하기 위한 단계와 변수를 편집합니다.
++
+image:./images/image54.png[]
++
+또는, 
++
+image:./images/image55.png[]
++
+3. main.yml 예제 새 파일의 이름을 openshift.yml로 변경합니다.
+4. 이전에 복사한 YAML 내용을 새 파일 편집 아래의 코드 텍스트 상자에 붙여넣어 예제 내용을 바꿉니다.
+5. `Start Commit` 을 클릭합니다. Commnt 제목을 입력하고 `new file commit` 을 클릭합니다.
+6. 참고용으로 시작 템플릿을 사용하세요.
++
+----
+name: OpenShift
+
+env:
+# 🖊️ EDIT your repository secrets to log into your OpenShift cluster and set up the context.
+# See https://github.com/redhat-actions/oc-login#readme for how to retrieve these values.
+# To get a permanent token, refer to https://github.com/redhat-actions/oc-login/wiki/Using-a-Service-Account-for-GitHub-Actions
+OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+# 🖊️ EDIT to set the kube context's namespace after login. Leave blank to use your user's default namespace.
+OPENSHIFT_NAMESPACE: "cmf-deployment-github-actions"
+
+# 🖊️ EDIT to set a name for your OpenShift app, or a default one will be generated below.
+APP_NAME: "aro-sample-github-action-app"
+
+# 🖊️ EDIT with the port your application should be accessible on.
+# If the container image exposes *exactly one* port, this can be left blank.
+# Refer to the 'port' input of https://github.com/redhat-actions/oc-new-app
+APP_PORT: "8080"
+
+# 🖊️ EDIT to change the image registry settings.
+# Registries such as GHCR, Quay.io, and Docker Hub are supported.
+IMAGE_REGISTRY: docker.io/{username}
+IMAGE_REGISTRY_USER: {username}
+IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+
+# 🖊️ EDIT to specify custom tags for the container image, or default tags will be generated below.
+IMAGE_TAGS: "latest"
+
+on:
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+workflow_dispatch:
+push:
+    # Edit to the branch(es) you want to build and deploy on each push.
+    branches: [ "main" ]
+
+jobs:
+# 🖊️ EDIT if you want to run vulnerability check on your project before deploying
+# the application. Please uncomment the below CRDA scan job and configure to run it in
+# your workflow. For details about CRDA action visit https://github.com/redhat-actions/crda/blob/main/README.md
+#
+# TODO: Make sure to add 'CRDA Scan' starter workflow from the 'Actions' tab.
+# For guide on adding new starter workflow visit https://docs.github.com/en/github-ae@latest/actions/using-workflows/using-starter-workflows
+
+openshift-ci-cd:
+    # 🖊️ Uncomment this if you are using CRDA scan step above
+    # needs: crda-scan
+    name: Build and deploy to OpenShift
+    runs-on: ubuntu-22.04
+    environment: development
+
+    outputs:
+    ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
+    SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
+
+    steps:
+    - name: Check for required secrets
+    uses: actions/github-script@v6
+    with:
+        script: |
+        const secrets = {
+            OPENSHIFT_SERVER: `${{ secrets.OPENSHIFT_SERVER }}`,
+            OPENSHIFT_TOKEN: `${{ secrets.OPENSHIFT_TOKEN }}`,
+        };
+
+        const GHCR = "ghcr.io";
+        if (`${{ env.IMAGE_REGISTRY }}`.startsWith(GHCR)) {
+            core.info(`Image registry is ${GHCR} - no registry password required`);
+        }
+        else {
+            core.info("A registry password is required");
+            secrets["IMAGE_REGISTRY_PASSWORD"] = `${{ secrets.IMAGE_REGISTRY_PASSWORD }}`;
+        }
+
+        const missingSecrets = Object.entries(secrets).filter(([ name, value ]) => {
+            if (value.length === 0) {
+            core.error(`Secret "${name}" is not set`);
+            return true;
+            }
+            core.info(`✔️ Secret "${name}" is set`);
+            return false;
+        });
+
+        if (missingSecrets.length > 0) {
+            core.setFailed(`❌ At least one required secret is not set in the repository. \n` +
+            "You can add it using:\n" +
+            "GitHub UI: https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository \n" +
+            "GitHub CLI: https://cli.github.com/manual/gh_secret_set \n" +
+            "Also, refer to https://github.com/redhat-actions/oc-login#getting-started-with-the-action-or-see-example");
+        }
+        else {
+            core.info(`✅ All the required secrets are set`);
+        }
+
+    - name: Check out repository
+    uses: actions/checkout@v4
+
+    - name: Set up .NET
+    uses: actions/setup-dotnet@v2
+    with:
+        dotnet-version: '8.0.x'  
+
+    - name: Determine app name
+    if: env.APP_NAME == ''
+    run: |
+        echo "APP_NAME=$(basename $PWD)" | tee -a $GITHUB_ENV
+
+    - name: Determine image tags
+    if: env.IMAGE_TAGS == ''
+    run: |
+        echo "IMAGE_TAGS=latest ${GITHUB_SHA::12}" | tee -a $GITHUB_ENV
+
+    # https://github.com/redhat-actions/buildah-build#readme
+    - name: Build from Dockerfile
+    id: build-image
+    uses: redhat-actions/buildah-build@v2
+    with:
+        image: ${{ env.APP_NAME }}
+        tags: ${{ env.IMAGE_TAGS }}
+
+        # If you don't have a Dockerfile/Containerfile, refer to https://github.com/redhat-actions/buildah-build#scratch-build-inputs
+        # Or, perform a source-to-image build using https://github.com/redhat-actions/s2i-build
+        # Otherwise, point this to your Dockerfile/Containerfile relative to the repository root.
+        dockerfiles: |
+        ./Dockerfile
+
+    # https://github.com/redhat-actions/push-to-registry#readme
+    - name: Push to registry
+    id: push-image
+    uses: redhat-actions/push-to-registry@v2
+    with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: ${{ env.IMAGE_REGISTRY }}
+        username: ${{ env.IMAGE_REGISTRY_USER }}
+        password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
+
+    # The path the image was pushed to is now stored in ${{ steps.push-image.outputs.registry-path }}
+
+    - name: Install oc
+    uses: redhat-actions/openshift-tools-installer@v1
+    with:
+        oc: 4
+
+    # https://github.com/redhat-actions/oc-login#readme
+    - name: Log in to OpenShift
+    uses: redhat-actions/oc-login@v1
+    with:
+        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+        openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+        insecure_skip_tls_verify: true
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+
+    # This step should create a deployment, service, and route to run your app and expose it to the internet.
+    # https://github.com/redhat-actions/oc-new-app#readme
+    - name: Create and expose app
+    id: deploy-and-expose
+    uses: redhat-actions/oc-new-app@v1
+    with:
+        app_name: ${{ env.APP_NAME }}
+        image: ${{ steps.push-image.outputs.registry-path }}
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+        port: ${{ env.APP_PORT }}
+
+    - name: Print application URL
+    env:
+        ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
+        SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
+    run: |
+        [[ -n ${{ env.ROUTE }} ]] || (echo "Determining application route failed in previous step"; exit 1)
+        echo
+        echo "======================== Your application is available at: ========================"
+        echo ${{ env.ROUTE }}
+        echo "==================================================================================="
+        echo
+        echo "Your app can be taken down with: \"oc delete all --selector='${{ env.SELECTOR }}'\""
+----
++
+참고: 이 템플릿은 .NET 앱 전용입니다. 애플리케이션 유형에 따라 템플릿을 선택해주세요.
++
+image:./images/image56.png[]
++
+7. 변경 사항을 커밋하지마자 해당 작업이 시작되고 애플리케이션이 배포됩니다.
++
+image:./images/image57.png[]
++
+image:./images/image58.png[]
+
+=== 6.4 Azure DevOps를 사용하여 ARO에서 컨테이너화 된 앱의 마이그레이션 단계
+
+Microsoft Azure DevOps를 사용하여 Red Hat OpenShift에 애플리케이션을 배포하는 파이프라인을 설정하는 모든 단계를 살펴봅니다.
+
+image:./images/image59.png[]
+
+**필수 조건**
+
+* GitHub 계정
+* Azure 구독
+* Red Hat OpenShift 클러스터
+* Azure DevOps에 대한 액세스
+
+1. ADO 조직에서 새 프로젝트를 만듭니다.
++
+image:./images/image60.png[]
++
+2. OpenShift 확장 프로그램 설치
++
+마켓플레이스[여기] ( https://marketplace.visualstudio.com/items?itemName=redhat.openshift-vsts )에서 무료로 받기를 클릭하고 조직에 설치합니다.
++
+image:./images/image61.png[]
++
+image:./images/image62.png[]
++
+3. 서비스 연결 생성
++
+Microsoft Azure DevOps를 OpenShift 클러스터에 연결하려면 OpenShift 서비스 연결을 구성해야 합니다.
++
+. Click on Project settings를 클릭합니다.
+. Service Connections를 선택합니다.
+. OpenShift를 선택합니다.
++
+image:./images/image63.png[]
++
+원하는 인증 방식(Basic, Token or No authentication)을 선택합니다. 기존 OpenShift 클러스터에서 서버 URL과 API 토큰을 가져옵니다.
++
+image:./images/image64.png[]
++
+4. 파이프라인 생성:
++
+파이프라인으로 이동합니다.
++
+image:./images/image65.png[]
++
+`Create Pipeline` 을 클릭합니다. 코드가 GitHub에 있으므로 GitHub 옵션을 사용합니다.
++
+image:./images/image66.png[]
++
+그런 다음 Azure Pipelines를 승인합니다. 리포지토리를 선택하라는 메시지가 표시됩니다.
++
+image:./images/image67.png[]
++
+image:./images/image68.png[]
++
+GitHub에 대한 연결이 승인되면 파이프라인을 구성하고 Starter 파이프라인을 선택합니다.
++
+image:./images/image69.png[]
++
+`Show assistant` 를 클릭하고 `Execute oc` 를 선택하여 OC 명령을 실행합니다.
++
+image:./images/image70.png[]
++
+image:./images/image71.png[]
++
+그런 다음 `Add` 를 클릭합니다. 다음 명령에 대해서도 같은 단계를 반복합니다. 참고용으로 첨부된 템플릿을 확인하세요.
++
+----
+        Starter Template:
+        -----------------
+
+        trigger:
+        - main
+
+        pool:
+          vmImage: ubuntu-latest
+
+        steps:
+
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc project ado-pipeline-project'
+          displayName: 'Select Project'
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc delete buildconfig ado-openshift-app'
+          displayName: 'Cleanup old Build Config'
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc delete deployment ado-openshift-app'
+          displayName: 'Cleanup old Deployment'
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc delete service ado-openshift-app'
+          displayName: 'Cleanup old Service'
+
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc delete route ado-openshift-app'
+          displayName: 'Cleanup old Route'
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc delete imagestream ado-openshift-app -n ado-pipeline-project'
+          displayName: 'Cleanup old Image Stream'  
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc new-app openshift/dotnet:7.0-ubi8~https://github.com/panchsan/ado-pipeline-openshift.git --name=ado-openshift-app --context-dir=MyDotnetOpenshiftApp'
+          displayName: 'Start New Deployment'
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc expose svc/ado-openshift-app'
+          displayName: 'Expose service'
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc logs -f buildconfig/ado-openshift-app'
+          displayName: 'Get Build Logs'
+        - task: oc-cmd@3
+          inputs:
+            connectionType: 'OpenShift Connection Service'
+            openshiftService: 'openshift-ado-service-connection'
+            cmd: 'oc status'
+          displayName: 'Verify Rollout'
+----
++
+파이프라인을 저장하고 실행합니다.
++
+image:./images/image72.png[]
++
+해당 작업에 접근하여 확인합니다.
++
+image:./images/image73.png[]
++
+5. 배포 확인
++
+OpenShift 클러스터에 로그인하고 OpenShift 클러스터에서 배포를 확인합니다.
++
+image:./images/image74.png[]
++
+image:./images/image75.png[]
+
+== 7. 부록
+
+* https://docs.openshift.com/en/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI 시작하기 - OpenShift CLI(oc) | CLI 도구 | OpenShift Container Platform 4.7]
+* https://docs.openshift.com/en/container-platform/4.9/cicd/pipelines/using-tekton-hub-with-openshift-pipelines.html[OpenShift 파이프라인과 함께 Tekton Hub 사용 - 파이프라인 | CI/CD | OpenShift 컨테이너 플랫폼 4.9]
+* https://www.redhat.com/en/blog/deploying-to-openshift-using-github-actions[GitHub Actions를 사용하여 OpenShift에 배포(redhat.com)]
+* https://github.com/Azure/ARO-Landing-Zone-Accelerator/blob/main/deployment/CLI/09%20appdeployment/app.azcli[ARO-Landing-Zone-Accelerator/deployment/CLI/09 appdeployment/app.azcli at main · Azure/ARO-Landing-Zone-Accelerator (github.com)]
