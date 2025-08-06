@@ -84,7 +84,7 @@ image:./images/image01.png[]
 == 3. 계획
 
 * 클러스터 관리 액세스 보장
-* Azure 구독에 대한 Controbutor 역할
+* Azure 구독에 대한 Contributor 역할
 
 == 4. 전제 조건
 
