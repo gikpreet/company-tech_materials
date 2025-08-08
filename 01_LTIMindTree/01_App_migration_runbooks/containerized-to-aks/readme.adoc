@@ -1,0 +1,20 @@
+= Migrating Containerized Application to AKS
+
+https://github.com/CAE-TEAM/cmf-runbooks/tree/main/scenarios/containerized-to-aks
+
+== 문서 요약
+
+[cols="1,5", options="header"]
+|===
+|Document Item|Current Value
+|Document Title|FACTORY_Runbook_Migrate_Containerized_Application_To_AKS_v5.0
+|Program|Cloud Accelerate Factory
+|Date Last Modified|31-07-2025
+|Date Last Reviewed|31-07-2025
+|Status|Draft V1.0
+|Document Description|이 문서에서는 Devops를 사용하여 컨테이너화된 온프레미스 애플리케이션을 AKS 클러스터로 마이그레이션/배포하는 방법에 대한 지침을 제공합니다.
+|===
+
+== 변경 로그
+
+== 목차
