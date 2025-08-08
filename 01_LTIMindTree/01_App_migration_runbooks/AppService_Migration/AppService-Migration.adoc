@@ -17,6 +17,31 @@
 
 == 목차
 
+* <<소개>>
+* <<Azure App Service>>
+
+<<1. 참조 아키텍처>> +
+<<2. 역할 및 책임>> +
+<<3. 계획>> +
+<<4. 사전 준비 사항>> +
+<<4.1 Azure CLI 설치>> +
+<<5. 실행>> +
+<<5.1 App Service 마이그레이션 단계 - Azure Portal 사용>> +
+<<5.1.1 게시 프로필 다운로드 및 가져오기 - Azure Portal 사용>> +
+<<5.1.2 배포 슬롯을 사용한 앱 서비스 배포>> +
+<<5.2 App Service 마이그레이션 단계 - Azure CLI 사용>> +
+<<5.2.1 IIS 서버에서 배포>> +
+<<5.2.2 소스 코드에서 배포>> +
+<<5.3 Azure DevOps 파이프라인을 사용한 App Service 배포>> +
+<<5.3.1 전제 조건>> +
+<<5.3.2 ADO(Azure DevOps) 서비스 연결 생성>> +
+<<5.3.3 ADO Classic 파이프라인을 사용한 App Service 배포 - CI/CD>> +
+<<5.3.4 ADO YAML 편집기를 사용하여 슬롯에 App Service 배포 - CI/CD>> +
+<<5.4 Git 작업을 사용한 App Service 배포>> +
+<<5.4.1 App Service 생성>> +
+<<5.4.2 배포>> +
+<<6. 부록>> +
+
 == 소개
 
 이 문서는 Azure App Service에 대한 .NET 앱 배포에 대한 간략한 소개, App Service 배포를 위한 필수 조건 및 마이그레이션을 위한 세부 절차/단계를 제공합니다.
@@ -27,7 +52,7 @@
 
 Azure App Service는 웹앱과 API를 안전하게 빌드, 확장 및 배포할 수 있는 완전 관리형 서비스입니다. PaaS 입니다.
 
-=== **Azure App Service**의 기능은 다음과 같습니다.
+**Azure App Service**의 기능은 다음과 같습니다.
 
 * 인프라 유지 관리, 보안 패치 및 확장 기능이 내장된 완전 관리형 서비스
 * 내장된 지속적 통합 및 지속적 배포(CI/CD) 및 가동 중지 시간 없는 배포
