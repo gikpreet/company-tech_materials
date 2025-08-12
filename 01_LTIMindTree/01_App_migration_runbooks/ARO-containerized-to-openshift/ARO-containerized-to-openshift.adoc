@@ -74,7 +74,7 @@ image:./images/image01.png[]
 
 [cols=5, options="header"]
 |===
-|과업|책임|책임|상담|정보
+|Task|Responsible|Accountable|Consulted|Informed
 |클러스터 생성|고객/파트너|고객/파트너|고객/파트너|Factory
 |공유할 평가 보고서|고객/파트너|고객/파트너|고객/파트너|Factory
 |분석 보고서 작성|Factory|Factory|고객/Factory|고객/Factory
