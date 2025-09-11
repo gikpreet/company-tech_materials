@@ -6,3 +6,7 @@ Microsoft Azure는 대량의 HPC 연산 작업을 클라우드에서 실행할 �
 
 1. link:./01_overview_hpc.adoc[HPC 개요]
 2. link:./02_hpc_on_cloud.adoc[클라우드 환경에서의 HPC]
+3. link:./03_hpc_on_azure.adoc[Microsoft Azure의 HPC]
+4. link:./04_azure_hpc_security.adoc[HPC 관점에서 본 Azure 보안]
+5. link:./04_azure_cyclecloud.adoc[Azure CycleCloud]
+6. link:./04_azure_hpc_architecture.adoc[Azure HPC 아키텍처]

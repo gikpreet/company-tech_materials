@@ -1,0 +1,7 @@
+= Azure HPC 접근 제어 및 아이덴티티 관리
+
+Azure HPC 환경에서 접근 제어와 아이덴티티 관리는 단순한 인증 절차를 넘어, 데이터 및 연산 자원에 대한 보안, 효율성, 규정 준수를 동시에 보장하는 핵심 보안 체계입니다. 이런 관리 체계는 크게 사용자 신원 관리(Identity Management)와 권한 기반 접근 제어(Access Control)로 구분되며, 상호 보완적으로 운영됩니다.
+
+== 아이덴티티 관리
+
+Azure HPC 환경에서 아이덴티티 관리는 Azure Active Directory(Azure AD)를 기반으로 수행됩니다.
