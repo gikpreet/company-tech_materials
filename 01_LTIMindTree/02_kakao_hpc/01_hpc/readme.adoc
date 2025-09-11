@@ -1,5 +1,4 @@
 = Azure HPC(High Performance Computing)
-:sectnums:
 
 1. link:./01_overview_hpc.adoc[HPC 개요]
 * link:./01_overview_hpc.adoc#sec1[HPC의 기술적 특성]
@@ -40,15 +39,16 @@
 * link:./03_hpc_on_azure.adoc#요약[요약]
 
 4. link:./04_azure_hpc_security.adoc[HPC 관점에서 본 Azure 보안]
-* 네트워크 보안
-** 가상 네트워크(Virtual Network) 격리
-** 고속 네트워크와 보안
-* 데이터 보안
-** 저장 데이터 보호(At-Rest Encryption)
-** 전송 데이터 보호(In-Transit Encryption)
-** 컨피덴셜 컴퓨팅(Confidential Computing)
-* 접근 제어 및 아이덴티티 관리
-* 운영 및 관리 보안
-* 규제 준수
+* link:./04_azure_hpc_security.adoc#네트워크-보안[네트워크 보안]
+** link:./04_azure_hpc_security.adoc#가상-네트워크virtual-network-격리[가상 네트워크(Virtual Network) 격리]
+** link:./04_azure_hpc_security.adoc#고속-네트워크와-보안[고속 네트워크와 보안]
+* link:./04_azure_hpc_security.adoc#데이터-보안[데이터 보안]
+** link:./04_azure_hpc_security.adoc#저장-데이터-보호at-rest-encryption[저장 데이터 보호(At-Rest Encryption)]
+** link:./04_azure_hpc_security.adoc#전송-데이터-보호in-transit-encryption[전송 데이터 보호(In-Transit Encryption)]
+** link:./04_azure_hpc_security.adoc#컨피덴셜-컴퓨팅confidential-computing[컨피덴셜 컴퓨팅(Confidential Computing)]
+* link:./04_azure_hpc_security.adoc#접근-제어-및-아이덴티티-관리[접근 제어 및 아이덴티티 관리]
+* link:./04_azure_hpc_security.adoc#운영-및-관리-보안[운영 및 관리 보안]
+* link:./04_azure_hpc_security.adoc#규제-준수[규제 준수]
+
 5. link:./05_azure_hpc_architecture.adoc[Azure HPC 아키텍처]
 

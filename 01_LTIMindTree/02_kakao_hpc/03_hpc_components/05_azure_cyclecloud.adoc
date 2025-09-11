@@ -1,2 +1,5 @@
 = Azure CycleCloud
 
+https://learn.microsoft.com/ko-kr/azure/cyclecloud/overview?view=cyclecloud-8
+
+https://learn.microsoft.com/ko-kr/azure/cyclecloud/concepts/core?view=cyclecloud-8 

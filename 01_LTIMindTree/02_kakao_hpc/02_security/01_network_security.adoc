@@ -1,4 +1,6 @@
-= 네트워크 보안
+= Azure HPC 네트워크 보안
+:sectnums:
+:toc:
 
 Azure HPC의 네트워크 보안은 
 
@@ -114,3 +116,7 @@ https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview?u
 . 테스트: IDPS/방화벽 정책 성능 영향 테스트(특히 RDMA 워크로드), 장애·DDOS 시나리오 DR 테스트
 . 문서화·운영 절차: 네트워크 변경(예: NSG 규칙 변경) 시점·책임자·롤백 절차 명시
 
+---
+
+link:./00_introduction.adoc[이전: Azure HPC를 위한 보안 구성] |
+link:./02_data_security.adoc[다음: Azure HPC 데이터 보안]

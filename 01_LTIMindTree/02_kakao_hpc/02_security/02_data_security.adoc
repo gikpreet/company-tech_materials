@@ -1,4 +1,6 @@
-= 데이터 보안
+= Azure HPC 데이터 보안
+:sectnums:
+:toc:
 
 HPC의 특성상 데이터는 대규모, 민감성, 실시간 처리가 요구되므로, 단순 암호화가 아니라 저장·전송·사용 단계 모두를 아우르는 통합적인 보안 설계가 필요합니다.
 
@@ -74,3 +76,5 @@ Azure HPC 환경에서 데이터 보안을 위해서는 데이터의 저장, 전
 
 ---
 
+link:./01_network_security.adoc[이전: Azure HPC 네트워크 보안] |
+link:./03_access_control_id_management.adoc[다음: Azure HPC 접근 제어 및 아이덴티티 관리]
