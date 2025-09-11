@@ -1,5 +1,7 @@
 = Microsoft Azure의 HPC
+:sectnums:
 :toc:
+
 
 Microsoft Azure는 HPC를 위한 포괄적인 클라우드 기반 인프라를 제공하여 복잡한 시뮬레이션, AI 모델링, 데이터 분석 등 다양한 연산 집약적인 작업을 지원합니다. Azure의 HPC 솔루션은 확장성, 보안, 비용 효율성을 갖춘 엔터프라이즈 급 인프라를 통해 기업과 연구기관의 요구를 충족합니다.
 
@@ -223,7 +225,7 @@ ExpressRoute를 사용하면 연결 공급자의 도움을 받아 프라이빗 �
 
 === 관리 모델
 
-=== HPC as a Service 모델
+==== HPC as a Service 모델
 
 HPCaaS란(HPCaaS : HPC as a Service), 클라우드의 자원을 활용하여 HPC 자원을 구성하고 네트워크 환경에서 데이터를 처리할 수 있도록 서비스하는 것을 의미합니다.
 

@@ -1,4 +1,5 @@
 = Azure HPC(High Performance Computing)
+:sectnums:
 
 1. link:./01_overview_hpc.adoc[HPC 개요]
 * link:./01_overview_hpc.adoc#sec1[HPC의 기술적 특성]
@@ -10,43 +11,34 @@
 
 2. link:./02_hpc_on_cloud.adoc[클라우드 환경에서의 HPC]
 * link:./02_hpc_on_cloud.adoc#클라우드-hpc의-기술-구성[클라우드 HPC의 기술 구성]
-* link:./02_hpc_on_cloud.adoc#가상화-및-컨테이너-기반-연산-환경[가상화 및 컨테이너 기반 연산 환경]
-탄력적 자원 확장(Elastic Resource Scaling)
-고속 네트워크 및 분산 스토리지
-가속기 기반 연산(Accelerator-Based Computing)
-워크로드 관리 및 스케줄링
-관리 및 보안
-요약
+** link:./02_hpc_on_cloud.adoc#가상화-및-컨테이너-기반-연산-환경[가상화 및 컨테이너 기반 연산 환경]
+** link:./02_hpc_on_cloud.adoc#탄력적-자원-확장elastic-resource-scaling[탄력적 자원 확장(Elastic Resource Scaling)]
+** link:./02_hpc_on_cloud.adoc#고속-네트워크-및-분산-스토리지[고속 네트워크 및 분산 스토리지]
+* link:./02_hpc_on_cloud.adoc#가속기-기반-연산accelerator-based-computing[가속기 기반 연산(Accelerator-Based Computing)]
+* link:./02_hpc_on_cloud.adoc#워크로드-관리-및-스케줄링[워크로드 관리 및 스케줄링]
+* link:./02_hpc_on_cloud.adoc#관리-및-보안[관리 및 보안]
+* link:./02_hpc_on_cloud.adoc#요약[요약]
 
 3. link:./03_hpc_on_azure.adoc[Microsoft Azure의 HPC]
-* 컴퓨팅 리소스
-** 가상 머신
-*** CPU 기반 가상 머신
-*** GPU 사용 가상 머신
-*** FPGA 가속
-* 스토리지
-** Azure NetApp Files
-** 스토리지 최적화 가상 머신
-** Blog, 테이블 및 큐 스토리지
-*** Azure Storage의 이점
-*** Azure Storage 데이터 서비스
-** Azure SMB 파일 스토리지
-** Azure Managed Lustre
-* 네트워크
-** RDMA 지원 인스턴스
-** 가상 네트워크
-** ExpressRoute
+* link:./03_hpc_on_azure.adoc#컴퓨팅-리소스[컴퓨팅 리소스]
+** link:./01_hpc/03_hpc_on_azure.adoc#가상-머신[가상 머신]
+* link:./03_hpc_on_azure.adoc#스토리지[스토리지]
+** link:./03_hpc_on_azure.adoc#azure-netapp-files[Azure NetApp Files]
+** link:./03_hpc_on_azure.adoc#스토리지-최적화-가상-머신[스토리지 최적화 가상 머신]
+** link:./03_hpc_on_azure.adoc#blog-테이블-및-큐-스토리[Blog, 테이블 및 큐 스토리지]
+** link:./03_hpc_on_azure.adoc#azure-smb-파일-스토리지[Azure SMB 파일 스토리지]
+** link:./03_hpc_on_azure.adoc#azure-managed-lustre[Azure Managed Lustre]
+* link:.//03_hpc_on_azure.adoc#네트워크[네트워크]
+** link:./03_hpc_on_azure.adoc#rdma-지원-인스턴스[RDMA 지원 인스턴스]
+** link:./03_hpc_on_azure.adoc#가상-네트워크[가상 네트워크]
+** link:./03_hpc_on_azure.adoc#expressroute[ExpressRoute]
 * 워크로드 관리 및 오케스트레이션
 ** 관리 모델
-** HPC as a Service 모델
-*** Hybrid/Cloud Busting 모델
-*** Cloud Native 모델
 ** Azure HPC 관리 서비스
-*** Azure Batch
-*** Azure CycleCloud
-*** Azure Batch와 CycleCloud 비교
 * 보안
 * 모니터링
+* 요약
+
 4. link:./04_azure_hpc_security.adoc[HPC 관점에서 본 Azure 보안]
 * 네트워크 보안
 ** 가상 네트워크(Virtual Network) 격리
