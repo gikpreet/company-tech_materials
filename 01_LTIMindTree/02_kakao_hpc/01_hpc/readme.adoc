@@ -51,4 +51,8 @@
 * link:./04_azure_hpc_security.adoc#규제-준수[규제 준수]
 
 5. link:./05_azure_hpc_architecture.adoc[Azure HPC 아키텍처]
-
+* link:./05_azure_hpc_architecture.adoc#디자인-고려-사항[디자인 고려사항]
+* link:./05_azure_hpc_architecture.adoc#참조-아키텍처[참조 아키텍처]
+** link:./05_azure_hpc_architecture.adoc#에너지-참조-아키첵처[에너지 참조 아키텍처]
+** link:./05_azure_hpc_architecture.adoc#재무-참조-아키텍처[재무 참조 아키텍처]
+** link:./05_azure_hpc_architecture.adoc#제조-참조-아키텍처[제조 참조 아키텍처]
