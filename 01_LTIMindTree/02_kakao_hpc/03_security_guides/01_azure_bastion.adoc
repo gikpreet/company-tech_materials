@@ -122,7 +122,9 @@ Bastion Developer에 연결하는 경우 다른 SKU를 사용하여 배포하는
 * End-to-End 프라이빗 연결을 만들려면 Azure Portal을 통해 연결하는 대신 네이티브 클라이언트를 사용하여 연결합니다.
 * 클라이언트 컴퓨터가 Azure가 아닌 온-프레미스인 경우 ExpressRoute 또는 VPN을 배포하고 Bastion 리소스에서 IP 기반 연결을 사용하도록 설정해야 합니다.
 
+////
 https://learn.microsoft.com/ko-kr/azure/bastion/bastion-overview
+////
 
 ---
 
