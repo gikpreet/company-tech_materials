@@ -6,4 +6,39 @@
 
 image:./images/image02.png[]
 
+////
 https://learn.microsoft.com/ko-kr/azure/bastion/quickstart-host-portal
+////
+
+이 연습을 위해서는 비용에 대한 권한이 있는 Azure 구독이 필요합니다.
+
+== Azure Portal에 로그인
+
+여기서는 Azure Portal에 로그인합니다. 아래 절차에 따릅니다.
+
+1. Azure Portal에 접속합니다.
++
+https://portal.azure.com
++
+2. 유효한 계정으로 Azure Portal에 로그인합니다.
+3. 위쪽의 **Azure Service**에서 **구독**을 클릭합니다.
++
+image:./images/image04.png[]
+4. 로그인한 계정의 디렉토리에 있는 계정과 내 역할 및 비용에 대한 권한을 확인합니다.
+
+== Resource Group 생성
+
+이 연습에서는 Resource Group을 생성합니다. 아래 절차에 따릅니다.
+
+1. 위쪽의 검색 텍스트 상자에서 **리소스 그룹**을 입력하고 검색 결과 창에서 **리소스 그룹**을 클릭합니다.
++
+image:./images/image05.png[]
+2. **리소스 관리자 | 리소스 그룹** 페이지에서 **+ 만들기**를 클릭합니다.
++
+image:./images/image06.png[]
+
+== Virtual Machine 생성
+
+1. 유효한 계정을 사용하여 Azure Portal에 로그인합니다.
+
+== 
