@@ -1,4 +1,6 @@
 = Azure Bastion
+:sectnums:
+:toc:
 
 Azure Bastion은 Azure 가상 네트워크(VNet) 내부에 안전하게 배치되어, 인터넷을 통해 가상 머신(VM)에 직접 접근하지 않고도 안전하게 RDP(Remote Desktop Protocol)와 SSH(Secure Shell) 접속을 제공하는 PaaS(Platform as a Service) 솔루션입니다. 즉, 퍼블릭 IP를 VM에 직접 노출하지 않고도 원격 관리가 가능하도록 설계된 보안 게이트웨이 역할을 수행합니다. Azure Bastion을 통해 연결하는 경우 가상 머신에 공용 IP 주소, 에이전트 또는 특수 클라이언트 소프트웨어가 필요하지 않습니다.
 

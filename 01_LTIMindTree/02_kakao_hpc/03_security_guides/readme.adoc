@@ -3,6 +3,12 @@
 == Table of Contents
 
 1. link:./01_azure_bastion.adoc[Azure Bastion]
+* 주요 이점
+* SKU
+* 아키텍처
+** 배포 - 기본 SKU
+** 배포: Bastion 개발자
+** 배포: 프라이빗 전용
 2. link:./02_guide_azure_bastion.adoc[Azure Bastion 배포 가이드]
 
 ---
