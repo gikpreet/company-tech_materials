@@ -17,7 +17,7 @@ OSS(Object Storage Server)와 OST(Object Storage Target)::
 클라이언트 노드::
 응용 프로그램이 Lustre 파일 시스템을 POSIX 호환 파일시스템처럼 사용할 수 있도록 함
 
-image:./images/image001.png[]
+image:./images/image001.png[width=700]
 
 ////
 https://learn.microsoft.com/ko-kr/azure/azure-managed-lustre/amlfs-overview
