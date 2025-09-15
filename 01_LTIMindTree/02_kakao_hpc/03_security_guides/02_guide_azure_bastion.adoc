@@ -8,6 +8,7 @@ image:./images/image02.png[]
 
 ////
 https://learn.microsoft.com/ko-kr/azure/bastion/quickstart-host-portal
+https://learn.microsoft.com/ko-kr/training/modules/connect-vm-with-azure-bastion/4-exercise-connect-vm-with-bastion
 ////
 
 이 연습을 위해서는 비용에 대한 권한이 있는 Azure 구독이 필요합니다.
