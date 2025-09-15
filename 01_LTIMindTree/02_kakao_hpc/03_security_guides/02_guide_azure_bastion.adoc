@@ -2,7 +2,7 @@
 
 이 가이드에서는 기본 설정과 표준 SKU를 사용하여 Azure Portal에서 Azure Bastion을 자동으로 배포하는 방법을 알아봅니다. Bastion을 배포한 후 SSH 또는 RDP를 사용하여 VM의 개인 IP 주소를 사용하여 Bastion을 통해 가상 네트워크의 VM(가상 머신)에 연결할 수 있습니다. 연결하는 VM에는 공용 IP 주소, 클라이언트 소프트웨어, 에이전트 또는 특수 구성이 필요하지 않습니다.
 
-이 배포 가이드는 아래와 같은 아키텍처의 Azure Bastion 구성을 만듭니다.
+이 가이드에서는 구성된 Virtual Network(Vnet)의 Linux VM에 Azure Bastion을 통해 SSH 연결을 구성합니다. 이 배포 가이드는 아래와 같은 아키텍처의 Azure Bastion 구성을 만듭니다.
 
 image:./images/image02.png[]
 
@@ -21,10 +21,12 @@ https://learn.microsoft.com/ko-kr/azure/bastion/quickstart-host-portal
 https://portal.azure.com
 +
 2. 유효한 계정으로 Azure Portal에 로그인합니다.
-3. 위쪽의 **Azure Service**에서 **구독**을 클릭합니다.
+3. 위쪽의 검색 텍스트 상자에서 **구독**을 입력하고 검색 결과 창에서 **구독**을 클릭합니다.
 +
-image:./images/image04.png[]
+image:./images/image04.png[width=500]
 4. 로그인한 계정의 디렉토리에 있는 계정과 내 역할 및 비용에 대한 권한을 확인합니다.
++
+image:./images/image07.png[]
 
 == Resource Group 생성
 
@@ -35,10 +37,153 @@ image:./images/image04.png[]
 image:./images/image05.png[]
 2. **리소스 관리자 | 리소스 그룹** 페이지에서 **+ 만들기**를 클릭합니다.
 +
-image:./images/image06.png[]
+image:./images/image06.png[width=600]
++
+3. 적절한 구독이 선택되어 있는 것을 확인하고, 지역을 선택한 후 리소스 이름을 지정합니다. 이 연습에서는 지역을 _(Asia Pacific)_ _Korea_ _South_ 로, 리소스 그룹 이름을 _HPC_Demo_ 로 지정합니다.
++
+image:./images/image08.png[width=600]
++
+4. 아래쪽의 **검토+만들기** 버튼을 클릭합니다.
+5. **리소스 그룹 만들기** 페이지에서 **만들기** 버튼을 클릭합니다.
+6. 생성된 리소스 그룹을 확인합니다. 생성한 리소스 그룹이 보이지 않으면 **리소스 그룹** 페이지를 새로 고침 합니다.
++
+image:./images/image09.png[width=600]
+
+== Virtual Network와 Bastion 생성
+
+1. 상단의 Microsoft Azure 로고를 클릭하여 Azure Portal의 Home 페이지로 이동합니다.
++
+image:./images/image10.png[width=500]
++
+2. Azure 서비스 구역에서 **리소스 만들기**를 클릭합니다.
++
+image:./images/image11.png[width=500]
++
+3. **범주** 구역에서 **네트워킹**을 클릭하고 **Virtual network**아래의 **만들기**를 클릭합니다.
++
+image:./images/image12.png[width=600]
+4. **가상 네트워크 만들기** 페이지에서 **구독**과 **리소스 그룹**이 제대로 선택 되었는지 확인하고, 가상 네트워크의 이름을 지정합니다. 이 연습에서는 _vnet_network_ 라는 이름을 사용합니다.
++
+image:./images/image13.png[width=600]
+5. 아래쪽에서 **다음: 보안** 버튼을 클릭합니다.
+6. **가상 네트워크 만들기**의 **보안** 페이지에서 **Azure Bastion 사용** 체크박스를 선택합니다. Azure Bastion의 이름을 지정하거나 기억합니다. 여기에서는 _vnet_hpc-Bastion_ 입니다.
++
+image:./images/image14.png[width=600]
++
+7. **Azure Bastion 공용 IP 주소** 드롭다운 리스트 아래의 **공용 IP 주소 선택**을 클릭하고 SKU를 확인합니다.
++
+image:./images/image15.png[width=400]
++
+8. 아래쪽의 **다음: IP 주소** 버튼을 클릭합니다.
+9. **가상 네트워크 만들기**의 **IP 주소** 페이지에서 주소 공간을 _192.168.0.0_ 으로 변경합니다. 미리 만들어진 두 서브넷을 확인합니다.
++
+[cols="1,2,2,2"]
+|===
+|서브넷|IP 주소 범위|크기|NAT 게이트웨이
+|default|192.168.0.0 - 192.168.0.255|/24(256개 주소)|-
+|AzureBastionSubnet|192.168.1.0 - 192.168.1.63|/26(64개 주소)|-
+|===
++
+image:./images/image16.png[width=600]
++
+10. 아래쪽의 **검토 + 만들기** 버튼을 클릭합니다.
+11. **가상 네트워크 만들기**의 **검토 + 만들기** 페이지에서 유효성 검사가 완료되면 **만들기** 버튼을 클릭합니다.
++
+image:./images/image17.png[width=600]
++
+12. Virtual Network 배포가 진행됩니다.
++
+13. 배포가 완료되면, 정보를 확인하고 리소스로 이동합니다.
++
+image:./images/image18.png[width=600]
++
+14. 왼쪽 패널에서 생성된 vnet_hpc 주소공간과 서브넷을 확인합니다.
++
+image:./images/image19.png[width=600]
++
+image:./images/image20.png[width=600]
++
+15. 왼쪽 패널에서 Bastion을 클릭하여 생성된 Azure Bastion 정보를 확인합니다. 현재 Bastion에 연결된 VM이 VNet에 존재하지 않습니다.
++
+image:./images/image21.png[width=600]
 
 == Virtual Machine 생성
 
-1. 유효한 계정을 사용하여 Azure Portal에 로그인합니다.
+이 연습에서는 생성한 VNet 내부에 Linux Virtual Machine을 생성합니다. 아래 절차에 따릅니다.
 
-== 
+1. 상단의 Microsoft Azure 로고를 클릭하여 Azure Portal의 Home 페이지로 이동합니다.
+2. Azure 서비스 구역에서 **리소스 만들기**를 클릭합니다.
+3. 왼쪽 패널에서 **컴퓨팅**을 선택하고 **가상 머신** 아래의 **만들기**를 클릭합니다.
++
+image:./images/image22.png[width=600]
++
+4. 아래와 같이 가상 머신 기본 사항을 지정합니다.
+. **가상 머신 만들기** 페이지의 **기본 사항**에서 **구독**을 확인하고 **리소스 그룹**으로 위에서 생성한 **HPC_Demo** 로 지정합니다.
+. 가상 머신 이름을 지정합니다. 여기에서는 _dm-guide-linux_ 로 지정합니다.
+. **지역**을 선택합니다. 여기에서는 _(Asia_ _Pacific)_ _Korea_ _Central_ 로 지정합니다.
+. **가용성 옵션**을 **인프라 중복이 필요하지 않습니다**로 지정합니다.
+. **보안 유형**을 표준으로 지정합니다.
+. **이미지**를 지정합니다. 여기서는 **Ubuntu Server 24.04 LTS - x64 Gen2**를 사용합니다.
+. **VM 아키텍처**를 **x64**로 지정합니다.
+. **크기**를 선택합니다. 여기에서는 **Standard_B1s - 1 vcpu, 1 GiB 메모리**를 사용합니다.
+. **인증 형식**을 **암호**로 지정하고 사용자 이름과 적당한 패스워드를 지정합니다.
+. **인바운드 포트 규칙**은 그대로 둡니다.
++
+image:./images/image23.png[width=800]
+5. 아래쪽에서 **다음: 디스크** 버튼을 클릭합니다.
+6. 아래와 같이 디스크 정보를 지정합니다.
+. **OS 디스크 크기**를 **이미지 기본값(30GiB)**로 지정합니다.
+. **OS 디스크 유형**을 지정합니다. 여기서는 **표준 HDD(로컬 중복 스토리지)**를 사용합니다.
+. 키 관리를 플랫폼 관리형 키로 지정합니다.
++
+image:./images/image24.png[width=800]
++
+7. 아래쪽에서 **다음: 네트워킹** 버튼을 클릭합니다.
+8. 아래와 같이 네트워킹 정보를 지정합니다.
+. **가상 네트워크**를 위에서 생성한 vnet_hpc로 지정합니다.
+. 서브넷을 default로 지정합니다.
+. **공용 IP**를 **없음**으로 지정합니다.
+. **네트워크 보안 그룹**을 **기본**으로 지정합니다.
+. **공용 인바운드 포트**를 **없음**으로 지정합니다.
+. **VM 삭제 시 NIC 삭제**를 **선택**합니다.
++
+image:./images/image25.png[width=800]
+9. 아래쪽에서 **검토 + 만들기** 버튼을 클릭합니다.
+10. **가상 머신 만들기**의 **검토 + 만들기** 페이지에서 최종 유효성 검사가 완료되면 **만들기** 버튼을 클릭합니다.
+11. 배포가 진행됩니다.
+12. 배포가 완료되면, 리소스로 이동 버튼을 클릭합니다.
++
+image:./images/image26.png[width=800]
+
+== Baston을 통해 VM에 연결
+
+여기에서는 공용 IP와 공용 인바운드 포트가 없이 만들어진 VM에 Bastion을 통해 연결합니다. 아래 절차에 따릅니다. 
+
+1. 상단의 Microsoft Azure 로고를 클릭하여 Azure Portal의 Home 페이지로 이동합니다.
+2. **Azure 서비스** 구역에서 **리소스 그룹**을 클릭합니다.
+3. 생성한 **HPC_Demo** 리소스 그룹을 클릭합니다.
+4. 리소스 그룹에서, 위에서 생성한 **dm_guide_linux** 가상 머신을 클릭합니다.
++
+image:./images/image27.png[width=800]
++
+5. 왼쪽 패널에서 **네트워킹** -> **네트워크 설정**을 클릭하고 **공용 IP 주소**가 없음을 확인합니다.
++
+image:./images/image28.png[width=800]
++
+6. 왼쪽 패널에서 **연결** -> **배스천**을 클릭합니다.
+7. **사용자 이름**과 **VM 암호**를 입력하고 **새 브라우저 탭에서 열기** 옵션을 선택한 후 **연결** 버튼을 클릭합니다.
++
+image:./images/image29.png[width=800]
++
+8. 새 브라우저 탭에서 SSH 연결을 확인합니다.
++
+image:./images/image30.png[width=800]
++
+9. 터미널에서 exit 를 입력하고 enter 키를 눌러 접속을 종료합니다.
+10. Disconnected 에서 Close 버튼을 클릭합니다.
++
+image:./images/image31.png[width=800]
+
+
+---
+
