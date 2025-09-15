@@ -182,7 +182,7 @@ image:./images/image30.png[width=800]
 9. 터미널에서 exit 를 입력하고 enter 키를 눌러 접속을 종료합니다.
 10. Disconnected 에서 Close 버튼을 클릭합니다.
 +
-image:./images/image31.png[width=800]
+image:./images/image31.png[width=300]
 
 
 ---
