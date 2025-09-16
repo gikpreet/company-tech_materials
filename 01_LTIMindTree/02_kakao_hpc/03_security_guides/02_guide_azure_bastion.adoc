@@ -311,6 +311,8 @@ See "man sudo_root" for details.
 azureuser@dm-cyclecloud:~$
 ----
 
+> az network bastion 명령은 업데이트가 잦습니다. 업데이트를 확인해기 위해 https://learn.microsoft.com/ko-kr/cli/azure/network/bastion?view=azure-cli-latest#az-network-bastion-ssh 을 참조하십시오.
+
 === 키 오류 발생시 대처
 
 아래와 같은 key permission 오류가 발생하는 경우가 있습니다. 
