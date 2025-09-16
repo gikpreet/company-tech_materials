@@ -6,7 +6,7 @@
 
 이 가이드에서는 구성된 Virtual Network(Vnet)의 Linux VM에 Azure Bastion을 통해 SSH 연결을 구성합니다. 이 배포 가이드는 아래와 같은 아키텍처의 Azure Bastion 구성을 만듭니다.
 
-image:./images/image02.png[]
+image:./images/image02.png[] 
 
 ////
 https://learn.microsoft.com/ko-kr/azure/bastion/quickstart-host-portal
