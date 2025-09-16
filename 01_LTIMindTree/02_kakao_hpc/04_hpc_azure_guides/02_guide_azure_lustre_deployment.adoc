@@ -1,1 +1,9 @@
-= Azure Lustre 배포 가이드
+= Azure Managed Lustre 배포 가이드
+:sectnums:
+:toc:
+
+이 가이드에서는 Azure Managed Lustre 파일 시스템을 배포하고, Azure Blob Storage와 통합하며, 클라이언트를 파일 시스템에 연결합니다.
+
+////
+https://learn.microsoft.com/ko-kr/training/modules/deploy-azure-managed-lustre-file-system/?source=recommendations
+////

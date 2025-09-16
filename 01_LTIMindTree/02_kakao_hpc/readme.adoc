@@ -115,12 +115,12 @@
 
 == Azure CycleCloud + Enroot/Slurm + Lustre 기반 HPC 배포 가이드
 
-1. link:./01_azure_managed_lustre.adoc[Azure Managed Lesture]
-2. link:./02_guide_azure_lustre_deployment.adoc[Azure Managed Lustre 배포 가이드]
-3. link:./03_slurm.adoc[Slurm]
-4. link:./04_enroot.adoc[Enroot]
-5. link:./05_slurm_enroot[Slurm과 Enroot 통합]
-6. link:./06_slurm_enroot_azure.adoc[Microsoft Azure에서 Slurm과 Enroot]
-7. link:./07_guide_slurm_enroot_azure_deployment.adoc[Azure에서 Slurm/Enroll 통합 배포 가이드]
-8. link:./08_azure_cyclecloud.adoc[Azure CycleCloud]
-9. link:./09_guide_azure_cyclecloud_deployment.adoc[Azure CycleCloud 배포 가이드]
+1. link:./04_hpc_azure_guides/01_azure_managed_lustre.adoc[Azure Managed Lesture]
+2. link:./04_hpc_azure_guides/02_guide_azure_lustre_deployment.adoc[Azure Managed Lustre 배포 가이드]
+3. link:./04_hpc_azure_guides/03_slurm.adoc[Slurm]
+4. link:./04_hpc_azure_guides/04_enroot.adoc[Enroot]
+5. link:./04_hpc_azure_guides/05_slurm_enroot[Slurm과 Enroot 통합]
+6. link:./04_hpc_azure_guides/06_slurm_enroot_azure.adoc[Microsoft Azure에서 Slurm과 Enroot]
+7. link:./04_hpc_azure_guides/07_guide_slurm_enroot_azure_deployment.adoc[Azure에서 Slurm/Enroll 통합 배포 가이드]
+8. link:./04_hpc_azure_guides/08_azure_cyclecloud.adoc[Azure CycleCloud]
+9. link:./04_hpc_azure_guides/09_guide_azure_cyclecloud_deployment.adoc[Azure CycleCloud 배포 가이드]
