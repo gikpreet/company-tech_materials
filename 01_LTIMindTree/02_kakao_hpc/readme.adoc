@@ -106,7 +106,7 @@
 .. link:./03_security_guides/01_azure_bastion.adoc#배포-기본-sku[배포 - 기본 SKU]
 .. link:./03_security_guides/01_azure_bastion.adoc#배포-bastion-개발자[배포: Bastion 개발자]
 .. link:./03_security_guides/01_azure_bastion.adoc#배포-프라이빗-전용[배포: 프라이빗 전용]
-2. link:./02_guide_azure_bastion.adoc[Azure Bastion 배포 가이드]
+2. link:.//03_security_guides/02_guide_azure_bastion.adoc[Azure Bastion 배포 가이드]
 . link:./03_security_guides/02_guide_azure_bastion.adoc#azure-portal에-로그인[Azure Portal에 로그인]
 . link:./03_security_guides/02_guide_azure_bastion.adoc#resource-group-생성[Resource Group 생성]
 . link:./03_security_guides/02_guide_azure_bastion.adoc#virtual-network와-bastion-생성[Virtual Network와 Bastion 생성]
