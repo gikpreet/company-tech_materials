@@ -223,7 +223,11 @@ az network bastion ssh --auth-type
                        []
 ----
 
-로컬 SSH를 통해 가상 머신에 액세스하려면 클라이언트에 Azure CLI가 설치되어야 합니다.
+로컬 SSH를 통해 가상 머신에 액세스하려면 클라이언트에 Azure CLI가 설치되어야 합니다. 설치 방법은 아래 링크의 설명을 따르십시오.
+
+* https://github.com/gikpreet/class-environment_settings/blob/main/10_microsoft_azure/azure_cli/01_azure_cli_windows.adoc[Windows 11에서 Azure CLI 설치]
+* https://github.com/gikpreet/class-environment_settings/blob/main/10_microsoft_azure/azure_cli/02_azure_cli_macos.adoc[macOS에서 Azure CLI 설치]
+* https://github.com/gikpreet/class-environment_settings/blob/main/10_microsoft_azure/azure_cli/03_azure_cli_linux.adoc[Linux에서 Azure CLI 설치]
 
 ////
 https://learn.microsoft.com/ko-kr/cli/azure/network/bastion?view=azure-cli-latest#az-network-bastion-ssh
