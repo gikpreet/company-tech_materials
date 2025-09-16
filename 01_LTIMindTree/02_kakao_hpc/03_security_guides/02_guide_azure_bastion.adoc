@@ -269,7 +269,7 @@ image:./images/image38.png[width=800]
 === SSH를 통해 접속
 
 1. 터미널을 실행합니다.
-2. 아래 명령을 실행하여 dm-cyclecloud 가상 머신에 접속합니다. 명령을 각 리소스의 이름으로 수정되어야 합니다.
+2. 아래 명령을 실행하여 dm-cyclecloud 가상 머신에 접속합니다. 명령은 각 리소스의 이름으로 수정되어야 합니다.
 +
 ----
 az network bastion ssh --name vnet_hpc-Bastion --resource-group HPC_demo --target-resource-id /subscriptions/079530c9-e0c4-40da-9c91-827e31795fba/resourceGroups/HPC_Demo/providers/Microsoft.Compute/virtualMachines/dm-cyclecloud --auth-type ssh-key --username azureuser --ssh-key C:/keys/dm-cyclecloud_key.pem
