@@ -281,7 +281,7 @@ az network bastion ssh --name vnet_hpc-Bastion --resource-group HPC_demo --targe
 ----
 az network bastion ssh 
     --name <Bastion 호스트 이름>
-    --resource-group <리소그 그룹 이름>
+    --resource-group <리소스 그룹 이름>
     --target-resource-id <VM의 resouce ID>
     --auth-type <인증 방식>
     --username <사용자 이름>
