@@ -66,6 +66,10 @@ POSIX 호환성::
 
 == Azure Managed Lustre
 
+////
+https://learn.microsoft.com/ko-kr/azure/azure-managed-lustre/amlfs-overview
+////
+
 Azure는 슈퍼컴퓨팅 수준의 워크로드를 지원하기 위해 Lustre를 직접 활용할 수 있는 기능을 제공합니다. HPC 전용 인프라, 고속 네트워크, 스토리지 서비스와 결합하여 확장성과 성능을 확보합니다. 클라우드 환경에서의 Lustre는 클라우드의 무제한 용량 특성을 기븐으로 사용자가 스토리지와 컴퓨팅을 유연하게 확장할 수 있는 장점은 누릴 수 있습니다.
 
 Microsoft Azure에서는 Lustre를 두 가지 방법으로 구현할 수 있습니다.

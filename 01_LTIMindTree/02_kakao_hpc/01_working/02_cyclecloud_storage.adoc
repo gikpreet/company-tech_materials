@@ -1,0 +1,24 @@
+= Azure CycleCloud
+
+이 가이드에서는 이전의 문서에서 생성한 가상 네트워크에서 CycleCloud를 생성합니다. Azure CycleCloud는 HPC 스케줄러를 구현하는 간단하고 안전하며 스케일리 가능한 방법을 제공합니다.
+
+== CycleCloud Storage 생성
+
+여기에서는 CycleCloud Storage를 생성합니다.
+
+1. Azure Portal에 접속합니다.
++
+https://portal.azure.com
++
+2. 유효한 계정으로 Azure Portal에 로그인합니다.
+3. Azure 서비스 구역에서 리소스 만들기를 클릭합니다.
+4. 왼쪽 패널에서 **스토리지**를 클릭하고 오른쪽에서 **스토리지 계정** 아래의 **만들기**를 클릭합니다.
++
+image:./images/02/image01.png[width=500]
++
+5. 아래와 같이 기본 사항을 지정합니다.
++
+[cols="1,3a", options="header"]
+|===
+|리소스 그룹|
+|===
