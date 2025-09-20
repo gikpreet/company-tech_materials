@@ -88,7 +88,14 @@ image:./images/01/03/image02.png[width=500]
 +
 image:./images/01/03/image03.png[width=600]
 +
-4. **가상 네트워크 만들기** 페이지에서 **구독**이 제대로 선택되었는지 확인하고, **리소스 그룹**에 앞에서 생성한 **rg-hpc**를 선택한 후 가상 네트워크의 이름을 지정합니다. 이 연습에서는 _vnet_hpc_ 라는 이름을 사용합니다.
+4. **가상 네트워크 만들기** 페이지에서, 아래와 같이 설정합니다.
+|===
+|항목|값
+|구독|해당 구독
+|리소스 그룹 이름|_rg-hpc_
+|가상 네트워크 이름|_vnet_hpc_
+|지역|_(Asia Pacific) Korea Central_
+|===
 +
 image:./images/01/03/image04.png[width=600]
 +
