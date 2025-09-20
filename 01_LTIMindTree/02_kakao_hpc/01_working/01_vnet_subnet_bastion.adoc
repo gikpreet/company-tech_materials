@@ -56,7 +56,15 @@ image:./images/01/02/image01.png[width=500]
 +
 image:./images/01/02/image02.png[width=600]
 +
-3. 적절한 구독이 선택되어 있는 것을 확인하고, 지역을 선택한 후 리소스 이름을 지정합니다. 이 연습에서는 **리소스 그룹 이름**을 _rg-hpc_ 로,  지정합니다. **지역**을 _(Asia Pacific)_ _Korea_ _Central_ 로 지정합니다.
+3. 리소스 그룹 만들기 페이지에서, 아래와 같이 설정합니다.
++
+[cols="1,3a", options="header"]
+|===
+|항목|값
+|구독|해당 구독
+|리소스 그룹 이름|_rg-hpc_
+|지역|_(Asia Pacific) Korea Central_
+|===
 +
 image:./images/01/02/image03.png[width=600]
 +
