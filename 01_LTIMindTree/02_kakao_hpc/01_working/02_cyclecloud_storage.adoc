@@ -29,7 +29,7 @@ https://learn.microsoft.com/ko-kr/training/modules/azure-cyclecloud-high-perform
 https://portal.azure.com
 +
 2. 유효한 계정으로 Azure Portal에 로그인합니다.
-3. Azure 서비스 구역에서 리소스 만들기를 클릭합니다.
+3. Azure 서비스 구역에서 **리소스 만들기**를 클릭합니다.
 4. 왼쪽 패널에서 **스토리지**를 클릭하고 오른쪽에서 **스토리지 계정** 아래의 **만들기**를 클릭합니다.
 +
 image:./images/02/image02.png[width=500]
@@ -61,6 +61,8 @@ image:./images/02/image03.png[width=500]
 |계층 구조 네임스페이스 사용|_선택_
 |네트워크 파일 시스템 v3 사용|_선택
 |===
++
+image:./images/02/image03-1.png[width=500]
 +
 8. 아래쪽에서 **다음** 버튼을 클릭합니다.
 9. **네트워킹** 탭에서 아래와 같이 네트워크 설정을 지정합니다. 다른 설정은 기본값으로 유지합니다.
