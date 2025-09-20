@@ -336,7 +336,7 @@ image:./images/02/03/image10.png[width=400]
 exit
 ----
 
-=== Bastion을 통해 CycleCloud에 연결
+=== Bastion을 통해 CycleCloud Portal에 연결
 
 ////
 https://learn.microsoft.com/ko-kr/azure/cyclecloud/how-to/ccws/connect-to-portal-with-bastion?view=cyclecloud-8
