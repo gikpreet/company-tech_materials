@@ -112,41 +112,7 @@ image:./images/02/image07.png[width=500]
 +
 image:./images/02/image08.png[width=600]
 
-== SSH 키 생성
 
-여기에서는 VM에서 사용할 SSH 키를 생성합니다. 아래 절차에 따릅니다.
-
-1. 위쪽의 검색 텍스트 상자에서 **SSH 키**를 입력하고 검색 결과 창에서 **SSH 키**를 클릭합니다.
-+
-image:./images/02/image09.png[width=400]
-+
-2. **SSH 키** 페이지에서 왼쪽 위의 **만들기** 를 클릭합니다.
-+
-image:./images/02/image10.png[width=600]
-+
-3. SSH 키 만들기 페이지에서 아래와 같이 기본 사항을 지정합니다. 다른 설정은 기본값으로 유지합니다.
-+
-[cols="1,3a", options="header"]
-|===
-|항목|값
-|리소스 그룹|_rg-hpc_
-|키 쌍 이름|_vnet-hpc-sshkey_
-|SSH 공개 키 원본|_새 키 쌍 생성_
-|SSH 키 유형|_RSA SSH 형식_
-|===
-+
-image:./images/02/image11.png[width=700]
-+
-4. 아래쪽의 **검토 + 만들기** 버튼을 클릭합니다.
-5. 유효성 검사를 통과하면 아래쪽의 **만들기** 버튼을 클릭합니다.
-6. **새 키 쌍 생성** 대화상자에서 **프라이빗 키 다운로드 및 리소스 만들기**를 클릭합니다.
-+
-image:./images/02/image12.png[width=400]
-+
-7. 다른 이름으로 저장 대화상자에서 SSH 키를 저장할 폴더를 지정하고 **저장** 버튼을 클릭하여 저장합니다.
-8. SSH 키 페이지에서 생성된 SSH 키를 확인합니다. (보이지 않으면 **새로 고침**을 클릭합니다)
-+
-image:./images/02/image13.png[width=800]
 
 == CycleCloud 가상 머신 생성
 
