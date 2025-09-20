@@ -338,10 +338,14 @@ exit
 
 === Bastion을 통해 CycleCloud에 연결
 
+////
+https://learn.microsoft.com/ko-kr/azure/cyclecloud/how-to/ccws/connect-to-portal-with-bastion?view=cyclecloud-8
+////
+
 로컬 환경에서 HTTPS 경로를 사용할 수 없는 경우 Azure Bastion을 사용하여 Azure CycleCloud 가상 머신에 SSH 터널을 설정할 수 있습니다. 아래 절차에 따릅니다.
 
 1. dm-cyclecloud 가상 컴퓨터의 resource id를 복사합니다.
-2. 아래 명령을 수행하여 Bastion Tunneling을 구성합니다. 아래 명령은 배스턴 터널링을 사용하여 dm-cyclecloud 가상 컴퓨터의 443번 포트를 로컬 호스트의 8443번 포트로 포워딩합니다.
+2. 아래 명령을 수행하여 Bastion Tunneling을 구성합니다. 아래 명령은 배스천 터널링을 사용하여 dm-cyclecloud 가상 컴퓨터의 443번 포트를 로컬 호스트의 8443번 포트로 포워딩합니다.
 +
 ----
 az network bastion tunnel --name vnet_hpc-Bastion --resource-group rg-hpc --target-resource-id /subscriptions/079530c9-e0c4-40da-9c91-827e31795fba/resourceGroups/rg-hpc/providers/Microsoft.Compute/virtualMachines/dm-cyclecloud --resource-port 443 --port 8443
@@ -487,7 +491,7 @@ image:./images/02/05/image04.png[width=800]
 +
 8. **Azure 역할 할당** 버튼을 클릭합니다.
 +
-image:./images/02/05/image10.png[width=800]
+image:./images/02/05/image05.png[width=800]
 +
 9. Azure 역할 할당 페이지에서 **역할 할당 추가**를 클릭합니다.
 +
