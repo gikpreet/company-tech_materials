@@ -89,6 +89,7 @@ image:./images/01/03/image02.png[width=500]
 image:./images/01/03/image03.png[width=600]
 +
 4. **가상 네트워크 만들기** 페이지에서, 아래와 같이 설정합니다.
++
 |===
 |항목|값
 |구독|해당 구독
