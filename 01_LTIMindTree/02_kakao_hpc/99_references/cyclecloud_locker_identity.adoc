@@ -1,0 +1,56 @@
+= Azure CycleCloud 로커 ID 설정 가이드
+
+Azure CycleCloud에서 **로커(Locker)**는 프로젝트 소스 코드, 사양 파일 및 기타 클러스터에 필요한 데이터를 저장하는 Azure Storage 컨테이너를 의미합니다. **로커 ID(Locker Identity)**는 CycleCloud가 이 스토리지 컨테이너에 안전하게 접근하기 위해 사용하는 인증 방법을 지칭합니다.
+
+가장 권장되는 최신 방법은 **관리 ID(Managed Identity)**를 사용하는 것입니다. 이 방법을 사용하면 스토리지 액세스 키와 같은 민감한 자격 증명을 코드나 구성 파일에 저장할 필요 없이 Azure 리소스에 대한 액세스 권한을 안전하게 부여할 수 있습니다.
+
+이 가이드에서는 관리 ID를 사용하여 CycleCloud 로커 ID를 설정하는 방법을 단계별로 안내합니다.
+
+== 1단계: 사용자 할당 관리 ID 생성
+
+먼저 CycleCloud가 스토리지 계정에 접근할 때 사용할 ID를 만듭니다.
+
+1. Azure Portal에 로그인합니다.
+2. 검색창에 "Managed Identities"를 검색하고 Managed Identities 서비스를 선택합니다.
+3. + 만들기 버튼을 클릭합니다.
+4. 다음 정보를 입력합니다.
+* 구독(Subscription): CycleCloud를 사용할 구독을 선택합니다.
+* 리소스 그룹(Resource group): 관리 ID를 저장할 리소스 그룹을 선택하거나 새로 만듭니다.
+* 지역(Region): 리소스 그룹과 동일한 지역을 선택하는 것이 좋습니다.
+* 이름(Name): 관리 ID의 이름을 지정합니다. (예: cyclecloud-locker-identity)
+5. 검토 + 만들기를 클릭한 후, 유효성 검사를 통과하면 만들기를 클릭하여 배포를 완료합니다.
+
+== 2단계: 스토리지 계정에 대한 권한 부여
+
+생성한 관리 ID가 로커로 사용될 스토리지 계정에 접근할 수 있도록 역할을 할당해야 합니다.
+
+1. 로커로 사용할 **스토리지 계정(Storage Account)**으로 이동합니다. 아직 없다면 새로 생성해야 합니다.
+2. 왼쪽 메뉴에서 **Access control (IAM)**을 선택합니다.
+3. + 추가 버튼을 클릭하고 **역할 할당 추가(Add role assignment)**를 선택합니다.
+4. 역할(Role) 탭에서 다음 역할 중 하나를 검색하여 선택합니다.
+* **Storage Blob 데이터 기여자(Storage Blob Data Contributor)**: 읽기 및 쓰기 권한이 모두 필요한 경우 이 역할을 선택합니다.
+* **Storage Blob 데이터 읽기 권한자(Storage Blob Data Reader)**: 읽기 전용 액세스만 필요한 경우 이 역할을 선택합니다. 일반적으로 프로젝트 파일을 업로드해야 하므로 기여자 역할이 권장됩니다.
+5. 다음을 클릭합니다.
+6. **멤버(Members)** 탭에서 다음을 설정합니다.
+* 다음에 대한 액세스 할당(Assign access to): **관리 ID(Managed identity)**를 선택합니다.
+* 멤버(Members): **+ 멤버 선택(+ Select members)**을 클릭합니다.
+* 오른쪽 창에서 이전에 생성한 사용자 할당 관리 ID(cyclecloud-locker-identity)를 검색하고 선택합니다.
+* 선택 버튼을 클릭합니다.
+7. 검토 + 할당 버튼을 클릭하여 역할 할당을 완료합니다.
+
+== 3단계: CycleCloud에서 구독 및 로커 구성
+
+마지막으로 CycleCloud UI에서 Azure 구독을 추가하거나 기존 구독을 편집하여 방금 설정한 관리 ID를 로커 ID로 지정합니다.
+
+1. 웹 브라우저를 통해 Azure CycleCloud 인터페이스에 로그인합니다.
+2. 오른쪽 상단의 사용자 아이콘을 클릭하고 **계정(Accounts)**으로 이동합니다.
+3. 구독(Subscriptions) 탭을 선택하고 추가(Add) 버튼을 클릭하여 새 구독을 추가하거나, 기존 구독을 선택하여 편집합니다.
+4. "구독 추가(Add Subscription)" 대화 상자에서 다음을 구성합니다.
+* 인증(Authentication): **관리 ID(Managed Identity)**를 선택합니다. (CycleCloud VM에 시스템 할당 관리 ID가 활성화되어 있으면 이 옵션이 기본으로 선택될 수 있습니다.)
+* 구독 ID(Subscription ID): 대상 Azure 구독 ID를 입력합니다.
+5. Storage Locker 구성(Storage Locker Configuration) 섹션으로 스크롤합니다.
+* 로커 ID(Locker Identity): 드롭다운 메뉴에서 1단계에서 생성한 사용자 할당 관리 ID(cyclecloud-locker-identity)를 선택합니다.
+* 스토리지 계정(Storage Account): 드롭다운 메뉴에서 2단계에서 권한을 부여한 스토리지 계정을 선택합니다. CycleCloud는 이 스토리지 계정 내에 cyclecloud라는 컨테이너를 자동으로 생성하여 로커로 사용합니다.
+6. 저장(Save) 버튼을 클릭하여 구성을 완료합니다.
+
+이제 Azure CycleCloud는 지정된 관리 ID를 사용하여 로커 스토리지 계정에 안전하게 인증하고 프로젝트 파일을 관리하게 됩니다. 이 방법을 통해 액세스 키를 직접 관리할 필요가 없어 보안이 강화되고 운영이 간소화됩니다.
