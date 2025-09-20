@@ -285,9 +285,9 @@ image:./images/02/image26-1.png[width=500]
 image:./images/02/image27.png[width=500]
 +
 12. 역할 할당 추가 페이지에서 **검토 + 할당** 버튼을 클릭합니다.
-13. sa4hpc | 액세스 제어(IAM) 페이지에서 **역할 할당** 탭을 선택하고 **Storage Blob 데이터 Contributor 구역에 추가된 관리 ID**를 확인합니다.
+13. **sa4hpc | 액세스 제어(IAM)** 페이지에서 **역할 할당** 탭을 선택하고 **Storage Blob 데이터 Contributor 구역에 추가된 관리 ID**를 확인합니다.
 +
-image:./images/02/image28.png[width=500]
+image:./images/02/image28-1.png[width=500]
 
 == 시스템 관리 ID 추가
 
