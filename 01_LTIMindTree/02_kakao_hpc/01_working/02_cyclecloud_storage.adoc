@@ -103,7 +103,8 @@ image:./images/02/image07.png[width=500]
 [cols="1,3a", options="header"]
 |===
 |항목|값
-|이름|cyclecloud|
+|이름|_cyclecloud_|
+|익명 액세스 수준|_프라이빗(익명 액세스 없음)_ (기본 값)
 |===
 +
 4. 아래쪽에서 **만들기** 버튼을 클릭합니다.
@@ -143,7 +144,7 @@ image:./images/02/image11.png[width=700]
 image:./images/02/image12.png[width=400]
 +
 7. 다른 이름으로 저장 대화상자에서 SSH 키를 저장할 폴더를 지정하고 **저장** 버튼을 클릭하여 저장합니다.
-8. SSH 키 페이지에서 생성된 SSH 키를 확인합니다.
+8. SSH 키 페이지에서 생성된 SSH 키를 확인합니다. (보이지 않으면 **새로 고침**을 클릭합니다)
 +
 image:./images/02/image13.png[width=800]
 
@@ -154,6 +155,9 @@ image:./images/02/image13.png[width=800]
 1. 상단의 Microsoft Azure 로고를 클릭하여 Azure Portal의 Home 페이지로 이동합니다.
 2. Azure 서비스 구역에서 **리소스 만들기**를 클릭합니다.
 3. 왼쪽 패널에서 **컴퓨팅**을 선택하고 **가상 머신** 아래의 **만들기**를 클릭합니다.
++
+image:./images/02/image13-1.png[width=600] 
++
 4. 아래와 같이 가상 머신 기본 사항을 지정합니다. 다른 설정은 기본값으로 유지합니다.
 +
 [cols="1,3a", options="header"]
@@ -186,11 +190,12 @@ image:./images/02/image15.png[width=500]
 image:./images/02/image16.png[width=800]
 +
 5. 아래에서 **다음: 디스크** 버튼을 클릭합니다.
-6. 디스크 탭에서, 기본 값들을 유지하고 아래에서 **다음: 네트워킹** 버튼을 클릭합니다.
+6. 디스크 탭에서, **VM으로 삭제** 항목치 선택되어 있는 것을 확인합니다.
 +
 image:./images/02/image17.png[width=800]
 +
-7. 네트워킹 탭에서, 아래와 같이 가상 머신의 네트워크 정보를 설정합니다. 다른 설정은 기본값으로 유지합니다.
+7. 나머지 기본 값들을 유지하고 아래에서 **다음: 네트워킹** 버튼을 클릭합니다.
+8. 네트워킹 탭에서, 아래와 같이 가상 머신의 네트워크 정보를 설정합니다. 다른 설정은 기본값으로 유지합니다.
 +
 [cols="1,3a", options="header"]
 |===
@@ -203,10 +208,10 @@ image:./images/02/image17.png[width=800]
 +
 image:./images/02/image18.png[width=800]
 +
-8. 아래에서 **검토 + 만들기** 버튼을 클릭합니다.
-9. 유효성 검사가 완료되면, 아래에서 **만들기** 버튼을 클릭합니다.
-10. 배포가 시작됩니다.
-11. 배포가 완료되면, 리소스로 이동 버튼을 클릭합니다.
+9. 아래에서 **검토 + 만들기** 버튼을 클릭합니다.
+10. 유효성 검사가 완료되면, 아래에서 **만들기** 버튼을 클릭합니다.
+11. 배포가 시작됩니다.
+12. 배포가 완료되면, **리소스로 이동** 버튼을 클릭합니다.
 
 == Locker Identity 생성
 
@@ -233,7 +238,7 @@ image:./images/02/image20.png[width=500]
 |구독|해당 구독
 |리소스 그룹|_rg-hpc_
 |이름|_cyclecloud-locker-identity_
-|지역|_Korea South_
+|지역|_Korea Central_
 |격리 범위|_없음_
 |===
 +
@@ -244,7 +249,7 @@ image:./images/02/image20.png[width=500]
 8. Portal의 위쪽 검색창에 **관리 ID**를 검색하고 선택합니다.
 9. 생성된 관리 ID를 확인합니다.
 +
-image:./images/02/image17-3.png[width=600]
+image:./images/02/image20-1.png[width=600]
 
 === 스토리지 계정에 대한 권한 부여
 
@@ -260,7 +265,7 @@ image:./images/02/image22.png[width=600]
 +
 6. **추가** 버튼을 클릭하고 **역할 할당 추가**를 클릭합니다.
 +
-image:./images/02/image17-5.png[width=600]
+image:./images/02/image22-1.png[width=600]
 +
 7. **역할 할당 추가** 페이지에서, **역할** 탭, **작업 기능 역할** 탭의 검색 텍스트 상자에 _storage blob 데이터 Contributor_ 를 입력하여 검색하고 선택합니다.
 +
