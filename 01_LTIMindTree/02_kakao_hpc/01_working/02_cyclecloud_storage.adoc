@@ -589,6 +589,6 @@ image:./images/02/06/image05.png[width=700]
 +
 9. 클러스터 페이지를 확인합니다.
 +
-image:./images/02/image06.png[width=700]
+image:./images/02/06/image06.png[width=700]
 
 ---
