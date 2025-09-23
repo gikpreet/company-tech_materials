@@ -85,7 +85,7 @@ image:./images/03/01/image04.png[width=700]
 11. **Advanced Settings**애서 나머지 값은 기본 값을 유지하고 **Next** 버튼을 클릭합니다.
 +
 ////
-image:./images/03/01/image05.png[width=700] 
+image:./images/03/01/image05.png[width=700]
 +
 11. **Virtual Machines** 단계에서 기본 값을 유지하고 **Next** 버튼을 클릭합니다.
 +
