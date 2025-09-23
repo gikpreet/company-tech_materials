@@ -21,7 +21,7 @@ image:./images/02/00/image01.png[width=800]
 https://learn.microsoft.com/ko-kr/training/modules/azure-cyclecloud-high-performance-computing/4-exercise-install-configure
 ////
 
-== CycleCloud Storage 생성
+== 스토리지 계정 생성
 
 여기에서는 CycleCloud Storage를 생성합니다.
 
@@ -42,8 +42,8 @@ image:./images/02/01/image01.png[width=500]
 |항목|값
 |리소스 그룹|_rg-hpc_
 |스토리지 계정 이름|_sa4hpc_
-|위치|_(Asia Pacific) Korea Central_
-|기본 스토리지 유형|_Azure Blob Storage 또는 Azure Data Lake Storage Gen 2_
+|위치|_(Asia Pacific) Korea South_
+|기본 스토리지 유형|_기본 스토리지 유형_
 |성능|_프리미엄_
 |프리미엄 계정 유형|_블록 blob_
 |중복도|_LRS(로컬 중복 스토리지)_
