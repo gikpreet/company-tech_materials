@@ -95,7 +95,7 @@ image:./images/01/03/image03.png[width=600]
 |구독|해당 구독
 |리소스 그룹 이름|_rg-hpc_
 |가상 네트워크 이름|_vnet_hpc_
-|지역|_(Asia Pacific) Korea Central_
+|지역|_(Asia Pacific) Korea South_
 |===
 +
 image:./images/01/03/image04.png[width=600]
