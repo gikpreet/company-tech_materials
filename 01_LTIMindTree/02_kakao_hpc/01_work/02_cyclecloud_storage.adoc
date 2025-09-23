@@ -98,7 +98,7 @@ image:./images/02/02/image01.png[width=600]
 |항목|값
 |리소스 그룹|_rg_rpc_
 |가상 머신 이름|_dm-cyclecloud_ (다른 이름을 지정할 수 있습니다)
-|지역|_(Asia Pacific) Korea Central_
+|지역|_(Asia Pacific) Korea South_
 |가용성 옵션|_인프라 중복이 필요하지 않습니다_
 |보안 유형|_표준_
 |이미지|이미지를 선택하기 위해 아래 절차에 따릅니다. 
