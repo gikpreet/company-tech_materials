@@ -341,7 +341,7 @@ image:./images/02/03/image11.png[width=700]
 +
 8. 웹 브라우저를 닫습니다.
 
-== 관리 ID 생성
+== Slurm Locker Identity를 위한 관리 ID 생성
 
 CycleCloud Locker는 Azure CycleCloud에서 프로젝트의 이진 파일(예: 오픈 소스 소프트웨어)을 저장하고 관리하기 위한 스토리지 영역입니다. 이 Locker에 업로드된 이진 파일들은 /project/Blob 경로에 표시되며, 이를 통해 프로젝트 작성자는 자신이 배포하고자 하는 소프트웨어의 바이너리를 관리하고 클러스터에 배포할 수 있습니다.
 
@@ -366,19 +366,21 @@ image:./images/02/04/image02.png[width=500]
 |항목|값
 |구독|해당 구독
 |리소스 그룹|_rg-hpc_
-|이름|_cyclecloud-locker-identity_
-|지역|_Korea Central_
+|이름|_locker-mi_
+|지역|_Korea South_
 |격리 범위|_없음_
 |===
 +
+image:./images/02/03/image02.png[width=500]
++
 4. 아래쪽의 **검토 + 만들기** 버튼을 클릭합니다.
-5. **사용자가 할당한 관리 ID 만들기** 페이지에서 설정을 확인하고 **만들기** 버튼을 클릭합니다.
+5. 유효성 검사가 완료되면 **만들기** 버튼을 클릭합니다.
 6. 배포가 시작됩니다.
 7. 배포가 완료되면 **리소스로 이동** 버튼을 클릭합니다.
 8. Portal의 위쪽 검색창에 **관리 ID**를 검색하고 선택합니다.
-9. 생성된 관리 ID를 확인합니다.
+9. 생성된 관리 ID를 확인합니다. 보이지 않으면 **새로 고침**을 클릭합니다.
 +
-image:./images/02/04/image03.png[width=600]
+image:./images/02/04/image04.png[width=600]
 
 === 스토리지 계정에 대한 권한 부여
 
@@ -390,33 +392,33 @@ image:./images/02/04/image03.png[width=600]
 4. rg-hpc 페이지의 리소스 목록에서 **sa4hpc** 스토리지 계정을 클릭합니다.
 5. 왼쪽 패널에서 **액세스 제어(IAM)**을 클릭합니다.
 +
-image:./images/02/04/image04.png[width=600]
+image:./images/02/04/image05.png[width=600]
 +
 6. **추가** 버튼을 클릭하고 **역할 할당 추가**를 클릭합니다.
 +
-image:./images/02/04/image05.png[width=600]
+image:./images/02/04/image06.png[width=600]
 +
 7. **역할 할당 추가** 페이지에서, **역할** 탭, **작업 기능 역할** 탭의 검색 텍스트 상자에 _storage blob 데이터 Contributor_ 를 입력하여 검색하고 선택합니다.
 +
-image:./images/02/04/image06.png[width=680]
+image:./images/02/04/image07.png[width=680]
 +
 8. 아래쪽에서 **다음** 버튼을 클릭합니다.
 9. **역할 할당 추가** 페이지의 **구성원** 탭에서 **다음에 대한 액세스 할당**에서 **관리 ID**를 선택하고 **+ 구성원 선택** 링크를 클릭합니다.
 +
-image:./images/02/04/image07.png[width=600]
+image:./images/02/04/image08.png[width=600]
 +
 10. 오른쪽의 관리 ID 선택 패널에서 관리 ID 드롭다운 목록을 클릭하고 사용자가 할당한 관리 ID를 선택합니다.
 +
-image:./images/02/04/image08.png[width=500]
+image:./images/02/04/image09.png[width=500]
 +
 11. 위에서 생성한 **cyclecloud-locker-identity**를 클릭하고 **선택** 버튼을 클릭합니다.
 +
-image:./images/02/04/image09.png[width=500]
+image:./images/02/04/image10.png[width=500]
 +
 12. 역할 할당 추가 페이지에서 **검토 + 할당** 버튼을 클릭합니다.
 13. **sa4hpc | 액세스 제어(IAM)** 페이지에서 **역할 할당** 탭을 선택하고 **Storage Blob 데이터 Contributor 구역에 추가된 관리 ID**를 확인합니다.
 +
-image:./images/02/04/image10.png[width=700]
+image:./images/02/04/image11.png[width=700]
 
 == CycleCloud 가삼 머신에 시스템 관리 ID 추가
 
@@ -535,12 +537,16 @@ image:./images/02/06/image03.png[width=700]
 image:./images/02/06/image04.png[width=700] 
 +
 7. 아래쪽의 **Save** 버튼을 클릭합니다.
-8. Subscriptions 페이지에서 위쪽의 **Back to Clusters** 링크를 클릭합니다.
+8. Subscriptions 페이지의 위쪽 테이블에서 생성 요청한 구독을 클릭하고 아래쪽 테이블에서 Task 탭을 클릭하여 생성 단계를 확인합니다.
++
+
++
+9. Subscriptions 페이지에서 위쪽의 **Back to Clusters** 링크를 클릭합니다.
 +
 image:./images/02/06/image05.png[width=700]
 +
-9. 클러스터 페이지를 확인합니다.
+10. 클러스터 페이지를 확인합니다.
 +
-image:./images/02/06/image06.png[width=700]
+image:./images/02/06/image07.png[width=700]
 
 ---
