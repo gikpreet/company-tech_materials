@@ -1,0 +1,4 @@
+= 설정
+
+== Azure cyclecloud에서 IPv4 Standard SKU를 사용하도록 설정하는 방법
+

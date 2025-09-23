@@ -7,7 +7,6 @@
 이 가이드에서는 첫 번째 단계로 프로젝트를 저장할 스토리지 계정을 만들고, CycleCloud 가상 머신을 생성합니다. 이 연습에서는 아래와 같은 과정을 수행합니다.
 
 * CycleCloud 스토리지 생성
-* 공용 SSH 키 생성
 * CycleCloud 가상 머신 생성
 * Locker Identity를 위한 관리 ID 생성
 * Web UI에서 CycleCloud 설정
@@ -61,7 +60,7 @@ image:./images/02/01/image02.png[width=600]
 |REST API 작업을 위한 보안 전송 필요|_선택_
 |스토리지 계정 키 액세스 사용|_선택_
 |계층 구조 네임스페이스 사용|_선택_
-|네트워크 파일 시스템 v3 사용|_선택
+|네트워크 파일 시스템 v3 사용|_선택_
 |===
 +
 image:./images/02/01/image03.png[width=500]
@@ -435,7 +434,7 @@ image:./images/02/04/image03.png[width=600]
 1. 상단의 Microsoft Azure 로고를 클릭하여 Azure Portal의 Home 페이지로 이동합니다.
 2. **리소스 그룹**을 클릭합니다.
 3. 리소스 그룹에서 **rg-hpc**를 클릭합니다.
-4. rg-hpc 페이지의 리소스 목록에서 sa4hpc 스토리지 계정을 클릭합니다.
+4. rg-hpc 페이지의 리소스 목록에서 **sa4hpc** 스토리지 계정을 클릭합니다.
 5. 왼쪽 패널에서 **액세스 제어(IAM)**을 클릭합니다.
 +
 image:./images/02/04/image04.png[width=600]
@@ -466,7 +465,7 @@ image:./images/02/04/image09.png[width=500]
 +
 image:./images/02/04/image10.png[width=700]
 
-== 시스템 관리 ID 추가
+== CycleCloud 가삼 머신에 시스템 관리 ID 추가
 
 Microsoft Entra 관리 ID를 사용하여 구독에서 클러스터를 관리할 수 있는 Azure CycleCloud 권한을 부여합니다. 이 방법은 서비스 주체를 사용하는 대신 사용됩니다. 관리 ID를 CycleCloud VM에 할당하여 Storage, Key Vault 또는 Azure Container Registries와 같은 Azure 리소스에 대한 액세스를 제공합니다.
 
@@ -558,7 +557,7 @@ image:./images/02/06/image02.png[width=700]
 ** 소문자를 포함해야 합니다.
 ** 숫자를 포함해야 합니다.
 ** 다음 특수를 문자 포함해야 합니다: @ # $ % ^ & * - _ ! + = [ ] { } | \ : ' , . ? ` ~ " ( ) ;
-4. 두 번째 페이지는 아래와 같습니다.
+4. 두 번째 페이지는 아래와 같습니다. 아래쪽의 **Done** 버튼을 클릭합니다.
 +
 image:./images/02/06/image03.png[width=700]
 +
