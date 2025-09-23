@@ -63,7 +63,7 @@ image:./images/01/02/image02.png[width=600]
 |항목|값
 |구독|해당 구독
 |리소스 그룹 이름|_rg-hpc_
-|지역|_(Asia Pacific) Korea Central_
+|지역|_(Asia Pacific) Korea South_
 |===
 +
 image:./images/01/02/image03.png[width=600]
