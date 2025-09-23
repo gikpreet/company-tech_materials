@@ -539,7 +539,7 @@ image:./images/02/06/image04.png[width=700]
 7. 아래쪽의 **Save** 버튼을 클릭합니다.
 8. Subscriptions 페이지의 위쪽 테이블에서 생성 요청한 구독을 클릭하고 아래쪽 테이블에서 Task 탭을 클릭하여 생성 단계를 확인합니다.
 +
-
+image:./images/02/06/image06.png[width=700]
 +
 9. Subscriptions 페이지에서 위쪽의 **Back to Clusters** 링크를 클릭합니다.
 +
