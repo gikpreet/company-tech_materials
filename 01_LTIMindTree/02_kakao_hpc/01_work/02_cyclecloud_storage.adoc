@@ -398,29 +398,33 @@ image:./images/02/04/image05.png[width=600]
 +
 image:./images/02/04/image06.png[width=600]
 +
-7. **역할 할당 추가** 페이지에서, **역할** 탭, **작업 기능 역할** 탭의 검색 텍스트 상자에 _storage blob 데이터 Contributor_ 를 입력하여 검색하고 선택합니다.
+7. **역할 할당 추가** 페이지에서, **역할** 탭, **작업 기능 역할** 탭의 검색 텍스트 상자에 _storage blob 데이터 Reader_ 를 입력하여 검색하고 선택합니다.
 +
-image:./images/02/04/image07.png[width=680]
+image:./images/02/04/image07.png[width=600]
 +
 8. 아래쪽에서 **다음** 버튼을 클릭합니다.
 9. **역할 할당 추가** 페이지의 **구성원** 탭에서 **다음에 대한 액세스 할당**에서 **관리 ID**를 선택하고 **+ 구성원 선택** 링크를 클릭합니다.
 +
 image:./images/02/04/image08.png[width=600]
 +
-10. 오른쪽의 관리 ID 선택 패널에서 관리 ID 드롭다운 목록을 클릭하고 사용자가 할당한 관리 ID를 선택합니다.
+10. 오른쪽의 관리 ID 선택 패널에서 관리 ID 드롭다운 목록을 클릭하고 **사용자가 할당한 관리 ID**를 선택합니다.
 +
 image:./images/02/04/image09.png[width=500]
 +
-11. 위에서 생성한 **cyclecloud-locker-identity**를 클릭하고 **선택** 버튼을 클릭합니다.
+11. 위에서 생성한 **locker-mi**를 클릭하고 **선택** 버튼을 클릭합니다.
 +
 image:./images/02/04/image10.png[width=500]
 +
 12. 역할 할당 추가 페이지에서 **검토 + 할당** 버튼을 클릭합니다.
-13. **sa4hpc | 액세스 제어(IAM)** 페이지에서 **역할 할당** 탭을 선택하고 **Storage Blob 데이터 Contributor 구역에 추가된 관리 ID**를 확인합니다.
-+
-image:./images/02/04/image11.png[width=700]
+13. 유효성 검사가 완료되면 **검토 + 할당** 버튼을 클릭합니다.
+14. **sa4hpc | 액세스 제어(IAM)** 페이지에서 **역할 할당** 탭을 선택하고 **Storage Blob 데이터 Contributor 구역에 추가된 관리 ID**를 확인합니다.
 
-== CycleCloud 가삼 머신에 시스템 관리 ID 추가
+////
+나중에 이미지 추가
+////
+
+
+== CycleCloud 가상 머신에 Azure 구독 추가
 
 Microsoft Entra 관리 ID를 사용하여 구독에서 클러스터를 관리할 수 있는 Azure CycleCloud 권한을 부여합니다. 이 방법은 서비스 주체를 사용하는 대신 사용됩니다. 관리 ID를 CycleCloud VM에 할당하여 Storage, Key Vault 또는 Azure Container Registries와 같은 Azure 리소스에 대한 액세스를 제공합니다.
 
@@ -443,51 +447,7 @@ image:./images/02/05/image03.png[width=800]
 +
 image:./images/02/05/image04.png[width=800]
 +
-8. **Azure 역할 할당** 버튼을 클릭합니다.
-+
-image:./images/02/05/image05.png[width=800]
-+
-9. Azure 역할 할당 페이지에서 **역할 할당 추가**를 클릭합니다.
-+
-image:./images/02/05/image06.png[width=800]
-+
-10. **역할 할당 추가** 패널에서 아래와 같이 설정합니다.
-+
-[cols="1,3a", options="header"]
-|===
-|항목|값
-|범위 선택|_스토리지_
-|구독|해당 구독
-|리소스|sa4hpc
-|역할|기여자
-|===
-+
-image:./images/02/05/image07.png[width=800] 
-+
-11. 같은 방법으로, 구독에 대한 역할을 추가합니다.
-+
-[cols="1,3a", options="header"]
-|===
-|항목|값
-|범위 선택|_구독_
-|구독|해당 구독
-|역할|_기여자_
-|===
-+
-12. 같은 방법으로, 리소스 그룹에 대한 역할을 추가합니다.
-+
-[cols="1,3a", options="header"]
-|===
-|항목|값
-|범위 선택|_리소스 그룹_
-|구독|해당 구독
-|리소스 그룹|_rg-hpc_
-|역할|기여자
-|===
-+
-13. 추가된 역할을 확인합니다. (목록이 보이지 않으면 새로 고침을 클릭합니다.)
-+
-image:./images/02/05/image08.png[width=800]
+8. 관리 ID 사용이 적용됨을 확인합니다.
 
 == CycleCloud Web UI에 액세스
 
