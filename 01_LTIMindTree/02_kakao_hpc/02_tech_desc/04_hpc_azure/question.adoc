@@ -1,0 +1,12 @@
+= Questions
+
+== Kakao에서 배포 방식
+
+* GUI or CLI 어떤 방식을 주로 사용하나요?
+* Custom Template과 배포 스크립트를 가이드에 삽입하면 좋겠습니다
+
+== Enroot
+
+* Enroot는 어떻게 배포하고 있나요?
+* Custom Template?
+* Cloud-init?

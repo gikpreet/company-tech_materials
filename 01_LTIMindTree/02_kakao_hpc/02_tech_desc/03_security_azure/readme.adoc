@@ -3,17 +3,6 @@
 == Table of Contents
 
 1. link:./01_azure_bastion.adoc[Azure Bastion]
-. link:./01_azure_bastion.adoc#주요-이점[주요 이점]
-. link:./01_azure_bastion.adoc#sku[SKU]
-. link:./01_azure_bastion.adoc#아키텍처[아키텍처]
-.. link:./01_azure_bastion.adoc#배포-기본-sku[배포 - 기본 SKU]
-.. link:./01_azure_bastion.adoc#배포-bastion-개발자[배포: Bastion 개발자]
-.. link:./01_azure_bastion.adoc#배포-프라이빗-전용[배포: 프라이빗 전용]
 2. link:./02_guide_azure_bastion.adoc[Azure Bastion 배포 가이드]
-. link:./03_security_guides/02_guide_azure_bastion.adoc#azure-portal에-로그인[Azure Portal에 로그인]
-. link:./03_security_guides/02_guide_azure_bastion.adoc#resource-group-생성[Resource Group 생성]
-. link:./03_security_guides/02_guide_azure_bastion.adoc#virtual-network와-bastion-생성[Virtual Network와 Bastion 생성]
-. link:./03_security_guides/02_guide_azure_bastion.adoc#virtual-machine-생성[Virtual Machine 생성]
-. link:./03_security_guides/02_guide_azure_bastion.adoc#baston을-통해-vm에-연결[Baston을 통해 VM에 연결]
 
 ---

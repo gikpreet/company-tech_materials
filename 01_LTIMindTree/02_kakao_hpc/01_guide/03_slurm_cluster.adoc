@@ -1,4 +1,4 @@
-= Slurm 클러스터 생성
+= Slurm 클러스터 생성 및 배포
 :sectnums:
 :toc:
 
