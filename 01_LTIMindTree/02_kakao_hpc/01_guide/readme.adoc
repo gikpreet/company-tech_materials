@@ -6,8 +6,8 @@
 
 == Table of Contents
 
-1. Virtual Network, Subnet, Bastion 구성
-2. Azure CycleCloud 배포
-3. Slurm 클러스터 생성 및 배포
+1. link:./01_vnet_subnet_bastion.adoc[Virtual Network, Subnet, Bastion 구성]
+2. link:./02_cyclecloud_storage.adoc[Azure CycleCloud 배포]
+3. link:./03_slurm_cluster.adoc[Slurm 클러스터 생성 및 배포]
 
 ---
