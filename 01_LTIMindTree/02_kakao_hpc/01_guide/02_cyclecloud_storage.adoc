@@ -522,11 +522,11 @@ image:./images/02/06/image02.png[width=700]
 3. Azure Portal을 표시하는 웹 브라우저로 이동해서 합니다.
 4. **rg-hpc** 리소스 그룹으로 이동하고, **vnet-hpc-sshkey**를 선택합니다.
 +
-image:./images/02/06/image03-1.png[width=600]
+image:./images/02/06/image03.png[width=600]
 +
 5. 퍼블릭 키를 복사합니다.
 +
-image:./images/02/06/image03-2.png[width=600]
+image:./images/02/06/image04.png[width=600]
 +
 6. CycleCloud 포털을 표시하는 웹 사이트로 이동합니다.
 7. SSH Public Key에 복사한 퍼블릭 키를 붙어넣습니다.
@@ -539,7 +539,7 @@ image:./images/02/06/image03-2.png[width=600]
 ** 다음 특수를 문자 포함해야 합니다: @ # $ % ^ & * - _ ! + = [ ] { } | \ : ' , . ? ` ~ " ( ) ;
 9. 두 번째 페이지는 아래와 같습니다. 아래쪽의 **Done** 버튼을 클릭합니다.
 +
-image:./images/02/06/image03-3.png[width=700]
+image:./images/02/06/image05.png[width=700]
 +
 10. Add Subscription 페이지에서, **Validate Credentials**버튼을 클릭합니다.
 11. **Test Successed** 메시지가 녹색 텍스트로 표시되는 것을 확인하고, 아래와 같이 정보를 지정합니다.
@@ -559,19 +559,19 @@ image:./images/02/06/image03-3.png[width=700]
 |Storage Container|_cyclecloud_
 |===
 +
-image:./images/02/06/image04.png[width=700] 
+image:./images/02/06/image06.png[width=700] 
 +
 12. 아래쪽의 **Save** 버튼을 클릭합니다.
 13. Subscriptions 페이지의 위쪽 테이블에서 생성 요청한 구독을 클릭하고 아래쪽 테이블에서 Task 탭을 클릭하여 생성 단계를 확인합니다.
 +
-image:./images/02/06/image06.png[width=700]
+image:./images/02/06/image07.png[width=700]
 +
 14. Subscriptions 페이지에서 위쪽의 **Back to Clusters** 링크를 클릭합니다.
 +
-image:./images/02/06/image05.png[width=700]
+image:./images/02/06/image08.png[width=700]
 +
 15. 클러스터 페이지를 확인합니다.
 +
-image:./images/02/06/image07.png[width=700]
+image:./images/02/06/image09.png[width=700]
 
 ---

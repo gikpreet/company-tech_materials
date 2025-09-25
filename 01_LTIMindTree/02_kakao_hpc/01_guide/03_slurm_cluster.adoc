@@ -142,6 +142,3 @@ image:./images/03/03/image02.png[width=400]
 3. 클러스터가 시작됩니다.
 +
 image:./images/03/03/image03.png[width=700]
-
-
-
