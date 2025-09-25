@@ -417,11 +417,9 @@ image:./images/02/04/image10.png[width=500]
 +
 12. 역할 할당 추가 페이지에서 **검토 + 할당** 버튼을 클릭합니다.
 13. 유효성 검사가 완료되면 **검토 + 할당** 버튼을 클릭합니다.
-14. **sa4hpc | 액세스 제어(IAM)** 페이지에서 **역할 할당** 탭을 선택하고 **Storage Blob 데이터 Contributor 구역에 추가된 관리 ID**를 확인합니다.
-
-////
-나중에 이미지 추가
-////
+14. **sa4hpc | 액세스 제어(IAM)** 페이지에서 **역할 할당** 탭을 선택하고 **Storage Blob 데이터 Reader 구역에 추가된 관리 ID**를 확인합니다.
++
+image:./images/02/04/image11.png[width=800]
 
 
 == CycleCloud 가상 머신에 Azure 구독 추가
@@ -451,9 +449,13 @@ image:./images/02/05/image04.png[width=500]
 +
 image:./images/02/05/image05.png[width=800]
 +
+|===
+|**참고** 이 단계는 가상 머신을 생성할 때 **관리** 단계에서 **시스템이 할당한 관리 ID 사용** 옵션을 체크 했으면 미리 설정되어 있습니다. **시스템 할당 항목** 상태가 **켜짐**으로 설정되어 있다면 1 ~ 8 단계를 수행하지 않아도 됩니다.
+|===
++
 9. 포털 위쪽의 검색 상자에서 _구독_ 을 입력하여 검색하고 결과에서 **구독**을 클릭합니다.
 +
-image:./images/02/05/image05.png[width=500]
+image:./images/02/05/image06.png[width=500]
 +
 10. 구독 페이지에서 해당 구독을 클릭합니다.
 +
@@ -494,13 +496,12 @@ image:./images/02/05/image15.png[width=800]
 22. 선택 후 아래쪽의 **다음** 버튼을 클릭합니다.
 23. 역할 할당 추가 페이지의 **구성원** 탭에서, **다음에 대한 액세스 할당**에서 **관리 ID**를 선택하고 **구성원 선택**을 클릭합니다.
 24. 오른쪽의 관리 ID 선택 패널에서, **관리 ID** 드롭다운 리스트를 클릭하고 **가상 머신**을 클릭합니다.
-25. dm-cyclecloud 가상 컴퓨터를 선택하고 아래쪽에서 **선택** 버튼을 클릭합니다.
+25. **dm-cyclecloud** 가상 컴퓨터를 선택하고 아래쪽에서 **선택** 버튼을 클릭합니다.
 26. 역할 할당 추가 페이지에서 **검토 + 할당** 버튼을 클릭합니다.
 27. 유효성 검사가 완료되면 **검토 + 할당** 버튼을 클릭합니다.
 28. 액세스 제어 페이지에서 **역할 할당**을 클릭하고 **기여자**와 **Storage Blob 데이터 Contributor**가 추가되어 있는 것을 확인합니다.
 +
 image:./images/02/05/image16.png[width=800]
-+
 
 == CycleCloud Web UI에 액세스
 
@@ -518,19 +519,30 @@ image:./images/02/06/image01.png[width=700]
 +
 image:./images/02/06/image02.png[width=700]
 +
-3. 두 번째 페이지에서, **User ID**와 **Password**를 입력하고 **Done** 버튼을 클릭합니다.
+3. Azure Portal을 표시하는 웹 브라우저로 이동해서 합니다.
+4. **rg-hpc** 리소스 그룹으로 이동하고, **vnet-hpc-sshkey**를 선택합니다.
++
+image:./images/02/06/image03-1.png[width=600]
++
+5. 퍼블릭 키를 복사합니다.
++
+image:./images/02/06/image03-2.png[width=600]
++
+6. CycleCloud 포털을 표시하는 웹 사이트로 이동합니다.
+7. SSH Public Key에 복사한 퍼블릭 키를 붙어넣습니다.
+8. **User ID**와 **Password**를 입력하고 **Done** 버튼을 클릭합니다.
 * 사용자 ID는 가상 컴퓨터의 ID와 별개의 ID입니다. 동일한 이름을 지정할 수도 있습니다. 여기서는 _demouser_ 로 지정합니다.
 * 패스워드는 8자에서 123자 사이여야 하며, 아래 규칙을 따라야 합니다.
 ** 대문자를 포함해야 합니다.
 ** 소문자를 포함해야 합니다.
 ** 숫자를 포함해야 합니다.
 ** 다음 특수를 문자 포함해야 합니다: @ # $ % ^ & * - _ ! + = [ ] { } | \ : ' , . ? ` ~ " ( ) ;
-4. 두 번째 페이지는 아래와 같습니다. 아래쪽의 **Done** 버튼을 클릭합니다.
+9. 두 번째 페이지는 아래와 같습니다. 아래쪽의 **Done** 버튼을 클릭합니다.
 +
-image:./images/02/06/image03.png[width=700]
+image:./images/02/06/image03-3.png[width=700]
 +
-5. Add Subscription 페이지에서, **Validate Credentials**버튼을 클릭합니다.
-6. **Test Successed** 메시지가 녹색 텍스트로 표시되는 것을 확인하고, 아래와 같이 정보를 지정합니다.
+10. Add Subscription 페이지에서, **Validate Credentials**버튼을 클릭합니다.
+11. **Test Successed** 메시지가 녹색 텍스트로 표시되는 것을 확인하고, 아래와 같이 정보를 지정합니다.
 +
 [cols="1,3a", options="header"]
 |===
@@ -549,16 +561,16 @@ image:./images/02/06/image03.png[width=700]
 +
 image:./images/02/06/image04.png[width=700] 
 +
-7. 아래쪽의 **Save** 버튼을 클릭합니다.
-8. Subscriptions 페이지의 위쪽 테이블에서 생성 요청한 구독을 클릭하고 아래쪽 테이블에서 Task 탭을 클릭하여 생성 단계를 확인합니다.
+12. 아래쪽의 **Save** 버튼을 클릭합니다.
+13. Subscriptions 페이지의 위쪽 테이블에서 생성 요청한 구독을 클릭하고 아래쪽 테이블에서 Task 탭을 클릭하여 생성 단계를 확인합니다.
 +
 image:./images/02/06/image06.png[width=700]
 +
-9. Subscriptions 페이지에서 위쪽의 **Back to Clusters** 링크를 클릭합니다.
+14. Subscriptions 페이지에서 위쪽의 **Back to Clusters** 링크를 클릭합니다.
 +
 image:./images/02/06/image05.png[width=700]
 +
-10. 클러스터 페이지를 확인합니다.
+15. 클러스터 페이지를 확인합니다.
 +
 image:./images/02/06/image07.png[width=700]
 
