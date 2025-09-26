@@ -16,7 +16,7 @@ https://techcommunity.microsoft.com/blog/azurehighperformancecomputingblog/runni
 
 == 사전 작업
 
-해당 환경에서 컴퓨팅 노드로 ND96***_v* 가상 머신을 사용하기 위해서는 사전 작업이 필요합니다. 이 가상머신을 사용할 수 있는 환경은 특정 고객사를 위해서 준비된 것으로, 그 외의 사용자에게는 사용이 제한되어 있습니다.
+Korea South 지역에서 컴퓨팅 노드로 ND96***_v* 가상 머신을 사용하기 위해서는 사전 작업이 필요합니다. 
 
 아래 절차에 따릅니다.
 
