@@ -222,7 +222,7 @@ image:./images/04/02/image01.png[width=800]
 +
 4. 해당 버전의 Release를 클릭하여 엽니다. 여기서는 2.0.25 입니다.
 +
-image:./images/04/02/image02.png[width=800]
+image:./images/04/02/image02.png[width=800] 
 +
 5. 파일을 확인합니다.
 +
@@ -383,4 +383,4 @@ $cyclecloud delete_template OpenPBS_HPC
 +
 3. CycleCloud 포털에서, 생성한 OpenPBS 템플릿이 제거된 것을 확인합니다.
 +
-image:./images/04/05/image01.png[width=700] 
+image:./images/04/05/image01.png[width=700]
