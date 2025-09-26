@@ -117,23 +117,23 @@ Resolving deltas: 100% (878/878), done.
 1. 아래 명령을 실행하여 cyclecloud-pbspro/templates 디렉토리로 이동합니다.
 +
 ----
-cd ./cyclecloud-pbspro/templates/
+$ cd ./cyclecloud-pbspro/templates/
 ----
 +
 2. 아래 명령을 사용하여 openpbs.txt 파일을 openpbs_hpc.txt 파일로 복사합니다.
 +
 ----
-cp openpbs.txt openpbs_hpc.txt
+$ cp openpbs.txt openpbs_hpc.txt
 ----
 +
 3. 아래 명령을 실행하여 복사된 파일을 확인합니다.
 +
 ----
-ls
+$ ls
 ----
 +
 ----
-[azureuser@dm-cyclecloud templates]$ ls
+$ ls
 openpbs_hpc.txt  openpbs.txt
 ----
 +
@@ -200,7 +200,7 @@ Config.Filter := Package in {"cycle.image.centos7", "almalinux8"}
 1. 터미널에서 아래 명령을 실행하여 cyclecloud-pbspro 디렉토리로 이동합니다.
 +
 ----
-cd ..
+$ cd ..
 ----
 +
 2. 아래 명령을 실행하여 프로젝트의 버전을 확인합니다.
