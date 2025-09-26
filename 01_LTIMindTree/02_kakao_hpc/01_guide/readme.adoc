@@ -9,7 +9,7 @@
 1. link:./01_vnet_subnet_bastion.adoc[Virtual Network, Subnet, Bastion 구성]
 2. link:./02_cyclecloud_storage.adoc[Azure CycleCloud 배포]
 3. link:./03_slurm_cluster.adoc[Slurm 클러스터 생성 및 배포]
-4. link:./04_template.adoc[사용자 정의 템플릿으로 클러스터 생성]
+4. link:./04_template.adoc[프로젝트를 사용한 사용자 정의 클러스터 템플릿 설정]
 5. ..
 6. link:./06_infiniBand.adoc[InfiniBand 구성]
 
