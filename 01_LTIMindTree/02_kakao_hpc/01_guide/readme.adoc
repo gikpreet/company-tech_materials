@@ -10,7 +10,8 @@
 2. link:./02_cyclecloud_storage.adoc[Azure CycleCloud 배포]
 3. link:./03_slurm_cluster.adoc[Slurm 클러스터 생성 및 배포]
 4. link:./04_template.adoc[프로젝트를 사용한 사용자 정의 클러스터 템플릿 설정]
-5. ..
-6. link:./06_infiniBand.adoc[InfiniBand 구성]
+5. link:./05_enroot.adoc[사용자 정의 CycleCloud project를 사용하여 enroot를 사용하여 NVIDIA GPU 워크로드를 실행[]
+6. Azure Managed Lustre를 사용하도록 설정
+7. link:./07_infiniBand.adoc[InfiniBand 구성]
 
 ---

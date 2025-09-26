@@ -1,4 +1,4 @@
-= Enroot 설정
+= 사용자 정의 CycleCloud project를 사용하여 enroot를 사용하여 NVIDIA GPU 워크로드를 실행
 :sectnums:
 :toc:
 
