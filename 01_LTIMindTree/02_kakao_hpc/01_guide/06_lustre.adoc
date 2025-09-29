@@ -16,11 +16,7 @@ image:./images/06/00/image01.png[width=800]
 
 이 연습을 위해서는 **Slurm 클러스터 생성 및 배포** 가이드에서 수행한 환경이 구성되어 있어야 합니다.
 
-== 스토리지 계정 설정 추가
-
-여기에서는 Azure Managed Lustre에서 blob 통합에 사용할 Storage 계정에 설정을 추가합니다. 아래 절차에 따릅니다.
-
-== Subnet 구성
+== Lustre용 Subnet 구성
 
 여기에서는 Lustre 구성을 위한 Subnet을 **Virtual Network, Subnet, Bastion 구성** 가이드의 **3. Virtual Network와 Bastion 생성** 단계에서 생성한 **vnet-hpc** 가상 네트워크에 생성합니다. 아래 단계를 따릅니다.
 
@@ -31,7 +27,7 @@ image:./images/06/00/image01.png[width=800]
 5. 왼쪽 패널에서 **설정** -> **서브넷**을 클릭합니다.
 6. **+서브넷**을 클릭합니다.
 +
-image:./images/06/02/image01.png[width=800]
+image:./images/06/01/image01.png[width=800]
 +
 7. 서브넷 추가 패널에서 **이름**을 _lestreSubnet_ 으로 지정하고 다른 값은 기본 값으로 지정합니다. IPv4를 위한 설정 값은 아래와 같습니다.
 +
@@ -46,24 +42,137 @@ image:./images/06/02/image01.png[width=800]
 |크기|/24(256개 주소)
 |===
 +
-image:./images/06/02/image02.png[width=700]
+image:./images/06/01/image02.png[width=700]
 +
 8. 아래쪽의 **추가** 버튼을 클릭합니다.
 9. 생성된 서브넷을 확인합니다.
 +
-image:./images/06/02/image03.png[width=700]
+image:./images/06/01/image03.png[width=700]
 
-== Azure Managed Lustre
+== 스토리지 계정 생성
+
+1. 상단의 Microsoft Azure 로고를 클릭하여 Azure Portal의 Home 페이지로 이동합니다.
+2. Azure 서비스 구역에서 **리소스 만들기**를 클릭합니다.
+3. 왼쪽 패널에서 **스토리지**를 클릭하고 오른쪽에서 **스토리지 계정** 아래의 **만들기**를 클릭합니다.
+4. 아래와 같이 기본 사항을 지정합니다. 다른 설정은 기본값으로 유지합니다.
++
+[cols="1,2a", options="header"]
+|===
+|항목|값
+|리소스 그룹|_rg-hpc_
+|스토리지 계정 이름|_sa4lustre_
+|위치|_(Asia Pacific) Korea South_
+|기본 스토리지 유형|_Azure Blob Storage 또는 Azure Data Lake Storage Gen 2
+|성능|_프리미엄_
+|프리미엄 계정 유형|_블록 blob_
+|중복도|_LRS(로컬 중복 스토리지)_
+|===
++
+image:./images/06/02/image01.png[width=800]
++
+5. 아래쪽에서 **다음** 버튼을 클릭합니다.
+6. **고급** 탭에서 아래와 같이 설정합니다.
++
+[cols="1,2a", options="header"]
+|===
+|항목|값
+|REST API 작업을 위한 보안 전송 필요|선택 (기본 값)
+|개별 컨테이너에 대한 익명 액세스 허용|선택하지 않음 (기본 값)
+|스토리지 계정 치 액세스 사용|선택 (기본 값)
+|Azure Portal에서 Microsoft Entra 인증 기본값 사용|선택하지 않음 (기본 값)
+|최소 TLS 버전|버전 1.2 (기본 값)
+|복사 작업에 대해 허용된 범위(미리 보기)|모든 스토리지 계정에서 (기본 값)
+|계층 구조 네임 스페이스 사용|**_선택_**
+|네트워크 파일 시스템 v3 사용|**_선택_**
+|===
++
+image:./images/06/02/image02.png[width=800]
++
+7. 아래쪽에서 **다음** 버튼을 클릭합니다.
+8. **네트워킹** 탭에서 아래와 같이 네트워크 설정을 지정합니다. 다른 설정은 기본값으로 유지합니다. 
++
+[cols="1,2a", options="header"]
+|===
+|항목|값
+|공용 네트워크 액세스|사용 (기본 값)
+|공용 네트워크 액세스 범위|_선택한 가상 네트워크 및 IP 주소에서 사용_
+|가상 네트워크|_vnet-vpc_
+|서브넷|lestureSubnet(192.168.1.0/24)('Micrsoft.Storage’엔드포인트가 추가됨)
+|===
++
+|===
+|**참고** 계정 액세스를 위해 사용자 IP를 추가할 수 있습니다.
+|===
++
+image:./images/06/02/image03.png[width=800]
++
+9. 아래쪽에서 **검토 + 만들기** 버튼을 클릭합니다.
+10. 유효성 검사가 완료되면 **만들기** 버튼을 클릭합니다.
+11. 배포가 진행됩니다.
+12. 배포가 완료되면 **리소스로 이동** 버튼을 클릭합니다.
+
+=== 컨테이너 생성
+
+여기에서는 생성한 스토리지 계정에 컨테이너를 생성합니다. 아래 절차에 따릅니다.
+
+1. 스토리지 계정 페이지에서, 왼쪽 패널에서 **데이터 스토리지** -> **컨테이너**를 클릭합니다.
+2. 컨테이너 페이지에서 **+ 컨테이너 추가**를 클릭합니다.
++
+image:./images/06/02/image04.png[width=600]
++
+3. **새 컨테이너** 패널에서 _lustreintegrated_ 를 입력하고 아래쪽의 **만들기** 버튼을 클릭합니다.
++
+image:./images/06/02/image05.png[width=400]
++
+4. 같은 방법으로, _logs_ 컨테이너를 생성합니다.
+5. 생성된 두 컨테이너를 확인합니다.
++
+image:./images/06/02/image06.png[width=600]
+
+== 보안 구성
+
+여기에서는 Azure Managed Lustre와 Blob 스토리지 계정을 통합하기 위한 관리 ID를 생성하고 설정합니다. 아래 절차에 따릅니다.
+
+=== 관리 ID 생성
+
+여기에서는 AMLFS와 Blob 스토리지 통합을 위한 관리 ID를 생성합니다. 아래 절차에 따릅니다.
+
+1. 위쪽의 검색창에서 _키 자격 증명 모음_을 입력하여 검색하고, 결과에서 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+== Azure Managed Lustre 생성
 
 여기에서는 Azure Managed Lustre를 구성합니다. 아래 단계에 따릅니다.
 
 1. 위쪽의 검색 창에서 lestre를 입력하여 검색한 다음, **Azure Managed Lustre**를 클릭합니다.
 +
-image:./images/06/03/image01.png[width=500]
+image:./images/06/04/image01.png[width=500]
 +
 2. **스토리지 센터** Managed Lustre 페이지에서 **+만들기**를 클릭합니다.
 +
-image:./images/06/03/image02.png[width=600]
+image:./images/06/04/image02.png[width=600]
 +
 3. **Basic** 탭에서 아래와 같이 정보를 입력합니다.
 +
@@ -74,7 +183,7 @@ image:./images/06/03/image02.png[width=600]
 |Resource Group|_rg-hpc_
 |Region|_(Asia Pacific) Korea South_
 |Availability zone|1(기본 값)
-|File System Name|_sample-amifs_ (이 이름은 리소스 목록에서 파일 시스템을 식별하는데 사용되며, mount 명령에 사용되는 파일 시스템의 이름이 아닙니다
+|File System Name|_sample-amlfs_ (이 이름은 리소스 목록에서 파일 시스템을 식별하는데 사용되며, mount 명령에 사용되는 파일 시스템의 이름이 아닙니다
 )
 |Storage and throughput|_Storage capacity_ (기본 값)
 |Storage(TiB)|48 (기본 값)
@@ -84,7 +193,43 @@ image:./images/06/03/image02.png[width=600]
 |Start time|00:00
 |===
 +
-image:./images/06/03/image03.png[width=800]
+image:./images/06/04/image03.png[width=800]
 +
 4. 아래쪽의 **Next + advaced** 버튼을 클릭합니다.
 5. **Advanced** 탭에서, Import/export data from blob 옵션을 선택하고 아래와 같이 정보를 입력합니다.
++
+[cols="1,3a", options="header"]
+|===
+|항목|값
+|Subscription|Azure Managed Lustre 파일 시스템을 사용할 구독을 선택합니다.
+|Storage Account|_sa4lesture_
+|Container|_lustreIntegrated_
+|Logging container|_logs_
+|Import Prefix(es) (Optional)|/data, /test +
+**참고** `+` 를 눌러 여러개의 접두사를 지정할 수 있습니다.
+|===
++
+image:./images/06/04/image04.png[width=800]
++
+6. 아래쪽에서 **Next: Disk encryption keys** 버튼을 클릭합니다.
+7. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
