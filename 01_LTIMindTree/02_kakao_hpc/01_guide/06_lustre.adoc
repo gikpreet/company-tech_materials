@@ -137,42 +137,84 @@ image:./images/06/02/image06.png[width=600]
 
 여기에서는 AMLFS와 Blob 스토리지 통합을 위한 관리 ID를 생성합니다. 아래 절차에 따릅니다.
 
-1. 위쪽의 검색창에서 _키 자격 증명 모음_을 입력하여 검색하고, 결과에서 
+1. Portal의 위쪽 검색창에 관리 ID를 검색하고 선택합니다.
++
+image:./images/06/03/image01.png[width=600]
++
+2. 관리 ID 페이지에서 왼쪽 위의 만들기를 클릭합니다.
+3. 사용자가 할당한 관리 ID 만들기 페이지에서 아래와 같이 설정합니다.
++
+[cols="1,2a", options="header"]
+|===
+|항목|값
+|구독|해당 구독
+|리소스 그룹|_rg-hpc_
+|이름|lusture-mi
+|지역|Korea South
+|격리 범위|없음
+|===
++
+image:./images/06/03/image02.png[width=600]
++
+4. 아래쪽의 **검토 + 만들기** 버튼을 클릭합니다.
+5. 유효성 검사가 완료되면 **만들기** 버튼을 클릭합니다.
+6. 배포가 완료되면 **리소스로 이동** 버튼을 클릭합니다.
+7. Portal의 위쪽 검색창에 관리 ID를 검색하고 선택합니다.
+8. 생성된 관리 ID를 확인합니다. 보이지 않으면 **새로 고침**을 클릭합니다.
++
+image:./images/06/03/image03.png[width=600]
 
+=== 스토리지 계정에 대한 권한 부여
 
+1. 상단의 Microsoft Azure 로고를 클릭하여 Azure Portal의 Home 페이지로 이동합니다.
+2. **리소스 그룹**을 클릭합니다.
+3. 리소스 그룹에서 **rg-hpc**를 클릭합니다.
+4. rg-hpc 페이지의 리소스 목록에서 sa4lustre 스토리지 계정을 클릭합니다.
+5. 왼쪽 패널에서 **액세스 제어(IAM)**을 클릭합니다.
+6. 추가 버튼을 클릭하고 역할 할당 추가를 클릭합니다.
++
+image:./images/06/03/image04.png[width=600]
++
+7. **역할 할당 추가** 페이지에서, **역할** 탭, **작업 기능 역할** 탭의 검색 텍스트 상자에 **storage blob 데이터 Contributor** 를 입력하여 검색하고 선택합니다.
++
+image:./images/06/03/image05.png[width=600]
++
+8. 아래쪽에서 **다음** 버튼을 클릭합니다.
+9. **역할 할당 추가** 페이지의 구성원 탭에서 **다음에 대한 액세스 할당**에서 **관리 ID**를 선택하고 **+ 구성원 선택** 링크를 클릭합니다.
++
+image:./images/06/03/image06.png[width=600]
++
+10. 오른쪽의 관리 ID 선택 패널에서 관리 ID 드롭다운 목록을 클릭하고 **사용자가 할당한 관리 ID**를 선택합니다.
++
+image:./images/06/03/image07.png[width=500]
++
+11. 위에서 생성한 lustre-mi를 클릭하고 선택 버튼을 클릭합니다.
++
+image:./images/06/03/image08.png[width=500]
++
+12. 역할 할당 추가 페이지에서 **검토 + 할당** 버튼을 클릭합니다.
+13. 유효성 검사가 완료되면 **검토 + 할당** 버튼을 클릭합니다.
+14. **sa4lustre | 액세스 제어(IAM)** 페이지에서 **역할 할당** 탭을 클릭하고 할당된 역할들을 확인합니다.
++
+image:./images/06/03/image09.png[width=800]
 
+== Key Vault 생성
 
+여기서는 Lustre 키를 저장하기 위한 키 자격 증명 모음(Azure Key Vault)를 생성합니다. 아래 절차에 따릅니다.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. Portal 위쪽의 검색창에서 _키 자격 증명 모음_ 을 입력하거 검색한 다음, 결과에서 **키 자격 증명 모음**을 클릭합니다.
 
 == Azure Managed Lustre 생성
 
 여기에서는 Azure Managed Lustre를 구성합니다. 아래 단계에 따릅니다.
 
-1. 위쪽의 검색 창에서 lestre를 입력하여 검색한 다음, **Azure Managed Lustre**를 클릭합니다.
+1. Portal 위쪽의 검색 창에서 lestre를 입력하여 검색한 다음, **Azure Managed Lustre**를 클릭합니다.
 +
-image:./images/06/04/image01.png[width=500]
+image:./images/06/05/image01.png[width=500]
 +
 2. **스토리지 센터** Managed Lustre 페이지에서 **+만들기**를 클릭합니다.
 +
-image:./images/06/04/image02.png[width=600]
+image:./images/06/05/image02.png[width=600]
 +
 3. **Basic** 탭에서 아래와 같이 정보를 입력합니다.
 +
@@ -193,7 +235,7 @@ image:./images/06/04/image02.png[width=600]
 |Start time|00:00
 |===
 +
-image:./images/06/04/image03.png[width=800]
+image:./images/06/05/image03.png[width=800]
 +
 4. 아래쪽의 **Next + advaced** 버튼을 클릭합니다.
 5. **Advanced** 탭에서, Import/export data from blob 옵션을 선택하고 아래와 같이 정보를 입력합니다.
@@ -209,7 +251,7 @@ image:./images/06/04/image03.png[width=800]
 **참고** `+` 를 눌러 여러개의 접두사를 지정할 수 있습니다.
 |===
 +
-image:./images/06/04/image04.png[width=800]
+image:./images/06/05/image04.png[width=800]
 +
 6. 아래쪽에서 **Next: Disk encryption keys** 버튼을 클릭합니다.
 7. 
