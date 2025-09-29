@@ -371,7 +371,7 @@ image:./images/02/04/image02.png[width=500]
 |격리 범위|_없음_
 |===
 +
-image:./images/02/03/image02.png[width=500]
+image:./images/02/04/image03.png[width=500]
 +
 4. 아래쪽의 **검토 + 만들기** 버튼을 클릭합니다.
 5. 유효성 검사가 완료되면 **만들기** 버튼을 클릭합니다.
