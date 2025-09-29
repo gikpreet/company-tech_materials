@@ -387,10 +387,28 @@ image:./images/06/06/image03.png[width=700]
 |Mount Option| 값 없음
 |===
 +
-image:./images/03/01/image04.png[width=700]
+image:./images/06/06/image04.png[width=700]
 +
-
-
+9. **Next** 버튼을 클릭합니다.
+10. **Advanced Settings** 단계에서 기본 값을 유지하고 **Next** 버튼을 클릭합니다.
++
+image:./images/06/06/image05.png[width=700]
++
+11. **Virtual Machines** 단계에서 기본 값을 유지하고 **Next** 버튼을 클릭합니다.
++
+image:./images/06/06/image06.png[width=700]
++
+12. **Security** 단계에서 기본 값을 유지하고 **Next** 버튼을 클릭합니다.
++
+image:./images/06/06/image07.png[width=700]
++
+13. **Cloud-init** 단계에서 기본 값을 유지하고 Save 버튼을 클릭합니다.
++
+image:./images/06/06/image08.png[width=700]
++
+14. 클러스터가 생성됩니다.
++
+image:./images/06/06/image09.png[width=700]
 
 
 
