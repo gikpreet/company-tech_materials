@@ -203,6 +203,62 @@ image:./images/06/03/image09.png[width=800]
 여기서는 Lustre 키를 저장하기 위한 키 자격 증명 모음(Azure Key Vault)를 생성합니다. 아래 절차에 따릅니다.
 
 1. Portal 위쪽의 검색창에서 _키 자격 증명 모음_ 을 입력하거 검색한 다음, 결과에서 **키 자격 증명 모음**을 클릭합니다.
++
+image:./images/06/04/image01.png[width=500]
++
+2. **키 자격 증명 모음** 창에서, 왼쪽 위의 **+ 만들기**를 클릭합니다.
++
+image:./images/06/04/image02.png[width=500]
++
+3. **Key Valut 만들기** 페이지에서 아래와 같이 설정합니다. 나머지 값은 기본 값으로 설정합니다.
++
+[cols="1,2a", options="header"]
+|===
+|항목|값
+|구독|해당 구독
+|리소스 그룹|_rg-hpc_
+|주요 자격 증명 모음 이름|_lustre-keyvault_
+|지역|_Korea South_
+|가격 책정 계층|_프리미엄 (HSM 지원 키에 대한 지원 포함)_
+|===
++
+image:./images/06/04/image03.png[width=800]
++
+4. 아래쪽의 **검토 + 만들기** 버튼을 클릭합니다.
+5. 유효성 검사가 완료되면 **만들기** 버튼을 클릭합니다.
+6. 배포가 완료되면 **리소스로 이동** 버튼을 클릭합니다.
++
+image:./images/06/04/image04.png[width=800]
++
+7. **lustre_keyvault** 키 자격 증명 모음 페이지에서, 왼쪽 패널의 **액세스 제어(IAM)**를 클릭합니다.
++
+image:./images/06/04/image05.png[width=600]
++
+8. **액세스 권한 확인** 탭에서, **이 리소스에 액세스 권한 부여** 구역의 **역할 할당 추가**를 클릭합니다.
++
+image:./images/06/04/image06.png[width=800]
++
+9. **역할 할당 추가** 페이지에서, **역할** 탭, **작업 기능 역할** 탭의 검색 텍스트 상자에 **Key Vault 관리자**를 입력하여 검색한 후 선택합니다.
++
+image:./images/06/04/image07.png[width=800]
++
+10. **다음** 버튼을 클릭합니다.
+11. **역할 할당 추가** 페이지의 **구성원** 탭에서 다음에 대한 액세스 할당에서 **사용자, 그룹 또는 서비스 주체**를 선택하고 **+ 구성원** 선택 링크를 클릭합니다.
++
+image:./images/06/04/image08.png[width=650]
++
+12. **구성원 선택**에서 사용자를 선택하고 **선택** 버튼을 클릭합니다.
++
+image:./images/06/04/image09.png[width=550]
++
+13. **lustre_keyvault** 키 자격 증명 모음 페이지에서, 왼쪽 패널의 **액세스 제어(IAM)**를 클릭합니다.
+14. **액세스 권한 확인** 탭에서 **내 액세스 보기** 버튼을 클릭합니다.
++
+image:./images/06/04/image10.png[width=550]
++
+15. 할당된 권한을 확인합니다.
++
+image:./images/06/04/image11.png[width=650]
 
 == Azure Managed Lustre 생성
 
@@ -254,15 +310,85 @@ image:./images/06/05/image03.png[width=800]
 image:./images/06/05/image04.png[width=800]
 +
 6. 아래쪽에서 **Next: Disk encryption keys** 버튼을 클릭합니다.
-7. 
+7. **Data encryption keys** 탭에서, **Disk encryption key type**에서 **Customer managed**을 선택합니다.
+8. **Customer key settings** 구역에서 **select or create key vault, key or version**을 클릭합니다.
++
+image:./images/06/05/image05.png[width=800]
++
+9. **키 선택** 페이지에서, **키 자격 증명 모음**에서 _lustre-keyvault_ 를 선택합니다.
+10. **키**에서 **새 키 만들기**를 클릭합니다.
+11. **키 만들기** 페이지에서 아래와 같이 정보를 입력합니다. 나머지는 기본 값을 선택합니다.
++
+|===
+|항목|값
+|옵션|생성 (기본 값)
+|이름|_lusture-key_
+|키 유형|RSA (기본 값)
+|RSA 키 크기|2048
+|===
++
+image:./images/06/05/image06.png[width=800]
++
+12. **만들기** 버튼을 클릭합니다.
+13. 키가 생성되면 아래쪽에서 **선택** 버튼을 클릭합니다.
+14. **Azure Managed Lustre** 페이지의 **Disk encryption keys** 탭에서 키 정보를 확인합니다.
++
+image:./images/06/05/image07.png[width=500]
++
+15. 아래의 Managed Identitis 구역에서 **Add user assigned managed identities** 를 클릭합니다.
++
+image:./images/06/05/image08.png[width=800]
++
+16. 오른쪽의 **사용자가 할당한 관리 ID 선택** 구역에서 **lustre-mi** 를 선택하고 추가 버튼을 클릭합니다.
++
+image:./images/06/05/image09.png[width=600]
++
+17. 선택된 관리 ID를 확인합니다.
++
+image:./images/06/05/image10.png[width=550]
++
+18. 아래쪽에서 **Review + create** 버튼을 클릭합니다.
+19. 유효성 검사가 완료되면 **Create** 버튼을 클릭합니다.
+20. 배포가 완료됩니다.
 
+////
+오류: https://github.com/gikpreet/technical_articles/blob/main/temp/cyclecloud/errors/error_messages.adoc
+////
 
+== Lustre를 사용하는 Slurm 클러스터 배포
 
+여기서는 이전 연습에서 생성한 CycleCloud에서, 배포한 Azure Managed Lustre를 사용하는 Slurm 클러스터를 생성합니다.
 
-
-
-
-
+1. 웹 브라우저 (Chrome, Edge 등)를 실행합니다.
+2. 생성된 CycleCloud의 Web UI에 접근합니다.
+3. **Create a New Cluster** 페이지의 **Scheduler** 섹션에서 **Slurm**을 클릭합니다.
++
+image:./images/06/06/image01.png[width=700]
++
+4. New Slrum Cluster 페이지에서, 위쪽의 Cluster Name 텍스트 상자에 클러스터의 이름을 입력합니다. 여기서는 slurm-lustre 입니다.
++
+image:./images/06/06/image02.png[width=700]
++
+5. 아래쪽에서 **Next** 버튼을 클릭합니다.
+6. **Required Settings** 단계에서 생성될 VM의 타입과 확장 한계를 지정하고, **Networking** 구역의 **Subnet ID**를 _rg-hpc:vnet-hpc-default_ 로 지정합니다.
++
+image:./images/06/06/image03.png[width=700]
++
+7. **Next** 버튼을 클릭합니다.
+8. **Network Attached Storage** 단계에서, **Additional FileSystem Mount** 옵션을 선택하고, 아래와 같이 정보를 입력합니다.
++
+[cols="1,3", options="header"]
+|===
+|항목|값
+|FS Type|_Azure Managed Lustre_
+|IP Address|_192.168.0.15_ (VNet 설정에 따라 변경될 수 있습니다)
+|Mount Point|_/data_
+|Export Point|_/data_
+|Mount Option| 값 없음
+|===
++
+image:./images/03/01/image04.png[width=700]
++
 
 
 

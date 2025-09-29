@@ -29,7 +29,7 @@ image:./images/03/01/image01.png[width=700]
 image:./images/03/01/image02.png[width=700]
 +
 5. 아래쪽에서 **Next** 버튼을 클릭합니다.
-6. **Required Settings** 단계에서 생성될 VM의 타입과 확장 한계를 하고, **Networking** 구역의 **Subnet ID**를 _rg-hpc:vnet-hpc-default_ 로 지정합니다.
+6. **Required Settings** 단계에서 생성될 VM의 타입과 확장 한계를 지정하고, **Networking** 구역의 **Subnet ID**를 _rg-hpc:vnet-hpc-default_ 로 지정합니다.
 +
 image:./images/03/01/image03.png[width=700]
 +
