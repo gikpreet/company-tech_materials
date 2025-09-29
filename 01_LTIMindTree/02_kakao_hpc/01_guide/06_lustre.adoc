@@ -97,7 +97,7 @@ image:./images/06/02/image02.png[width=800]
 |공용 네트워크 액세스|사용 (기본 값)
 |공용 네트워크 액세스 범위|_선택한 가상 네트워크 및 IP 주소에서 사용_
 |가상 네트워크|_vnet-vpc_
-|서브넷|lestureSubnet(192.168.1.0/24)('Micrsoft.Storage’엔드포인트가 추가됨)
+|서브넷|_lestureSubnet(192.168.1.0/24)('Micrsoft.Storage’엔드포인트가 추가됨)_
 |===
 +
 |===
@@ -293,7 +293,7 @@ image:./images/06/05/image02.png[width=600]
 +
 image:./images/06/05/image03.png[width=800]
 +
-4. 아래쪽의 **Next + advaced** 버튼을 클릭합니다.
+4. 아래쪽의 **Next + advanced** 버튼을 클릭합니다.
 5. **Advanced** 탭에서, Import/export data from blob 옵션을 선택하고 아래와 같이 정보를 입력합니다.
 +
 [cols="1,3a", options="header"]
