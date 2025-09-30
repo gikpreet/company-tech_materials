@@ -442,7 +442,7 @@ image:./images/06/05/image08.png[width=800]
 +
 16. 오른쪽의 **사용자가 할당한 관리 ID 선택** 구역에서 **lustre-mi** 를 선택하고 추가 버튼을 클릭합니다.
 +
-image:./images/06/05/image09.png[width=600]
+image:./images/06/05/image09.png[width=550]
 +
 17. 선택된 관리 ID를 확인합니다.
 +
@@ -451,7 +451,16 @@ image:./images/06/05/image10.png[width=550]
 18. 아래쪽에서 **Review + create** 버튼을 클릭합니다.
 19. 유효성 검사가 완료되면 **Create** 버튼을 클릭합니다.
 20. 배포가 완료되면, **리소스로 이동** 버튼을 클릭합니다.
-
++
+image:./images/06/05/image11.png[width=550]
++
+21. 리소스 그룹에서, 생성된 sample-amlfs Azure Managed Lustre를 클릭합니다.
++
+image:./images/06/05/image12.png[width=700]
++
+22. **sample-amlfs** 개요 페이지에서, MGS IP Address를 확인합니다.
++
+image:./images/06/05/image13.png[width=800]
 ////
 오류: https://github.com/gikpreet/technical_articles/blob/main/temp/cyclecloud/errors/error_messages.adoc
 ////
@@ -482,7 +491,7 @@ image:./images/06/06/image03.png[width=700]
 |===
 |항목|값
 |FS Type|_Azure Managed Lustre_
-|IP Address|_192.168.0.15_ (VNet 설정에 따라 변경될 수 있습니다)
+|IP Address|_192.168.0.10_ (생성된 AMLFS(Azure Managed Lustre File System)의 MGS IP입니다)
 |Mount Point|_/data_
 |Export Point|_/data_
 |Mount Option| 값 없음
