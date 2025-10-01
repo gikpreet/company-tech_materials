@@ -519,13 +519,3 @@ image:./images/06/06/image08.png[width=700]
 14. 클러스터가 생성됩니다.
 +
 image:./images/06/06/image09.png[width=700]
-
-
-
-
-
-
-
-
-
-
