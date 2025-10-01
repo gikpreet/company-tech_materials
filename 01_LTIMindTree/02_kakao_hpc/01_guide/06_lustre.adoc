@@ -461,9 +461,6 @@ image:./images/06/05/image12.png[width=700]
 22. **sample-amlfs** 개요 페이지에서, MGS IP Address를 확인합니다.
 +
 image:./images/06/05/image13.png[width=800]
-////
-오류: https://github.com/gikpreet/technical_articles/blob/main/temp/cyclecloud/errors/error_messages.adoc
-////
 
 == Lustre를 사용하는 Slurm 클러스터 배포
 
