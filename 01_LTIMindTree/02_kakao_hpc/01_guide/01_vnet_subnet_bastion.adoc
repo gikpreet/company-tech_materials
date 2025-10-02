@@ -12,7 +12,7 @@ https://learn.microsoft.com/ko-kr/training/modules/connect-vm-with-azure-bastion
 image:./images/01/00/image01.png[architecture, 800, frame="on"]
 
 ++++
-<img src="./images/01/00/image01.png" style="border: 2px solid; border-radius: 5px;" width=800>
+<img src="./images/01/00/image01.png" style="border: 2px solid; border-radius: 5px;" width=800 border="1">
 ++++
 
 이 가이드에서는 첫 번째 단계로 리소스 그룹을 만들고, Virtual Network와 Subnet을 구성한 후 Bastion을 사용한 보안된 접근을 구성합니다. 이 연습에서는 아래와 같은 과정을 수행합니다.
