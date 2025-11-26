@@ -38,7 +38,7 @@
 . link:./02_tech_desc/02_hpc/05_hpc_on_cloud.adoc[클라우드 환경에서의 HPC]
 . link:./02_tech_desc/02_hpc/06_hpc_on_azure.adoc[Microsoft Azure의 HPC]
 . link:./02_tech_desc/02_hpc/07_azure_hpc_architecture.adoc[Microsoft Azure HPC 아키텍처]
-3. link:./02_tech_desc/03_secuity[보안]
+3. link:./02_tech_desc/03_security/[보안]
 . link:./02_tech_desc/03_security/01_network_security.adoc[Azure HPC 네트워크 보안]
 . link:./02_tech_desc/03_security/02_data_security.adoc[Azure HPC 데이터 보안]
 . link:./02_tech_desc/03_security/03_access_control_id_management.adoc[Azure HPC 접근 제어 및 아이덴티티 관리]
