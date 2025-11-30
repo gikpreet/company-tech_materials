@@ -1,0 +1,32 @@
+= Microsoft Fabric 개요
+
+Microsoft Fabric은 이전 Azure Data Fabric의 최신 통합 플랫폼의 이름이며, 엔드-투-엔드 데이터 분석 요구 사항을 충족하기 위해 설계된 통합된 SaaS 플랫폼입니다. 기존의 여러 Azure 및 Power BI 서비스를 하나의 단일 환경으로 통합하여 데이터 이동과 통합의 복접성을 제거하는 것이 핵심 목표입니다.
+
+== 주요 구성 요소 및 워크로드
+
+Fabric은 데이터 엔지니어부터 비즈니스 사용자까지 모든 역할을 지원하는 다양한 경험 또는 워크로드를 포함하고 있습니다.
+
+[cols="1,2,2", options="header"]
+|===
+|워크로드|주요 기능|과거 서비스 연관
+|Data Factory|데이터 통합 및 오케스트레이션, 데이터 파이프라인 생성|Azure Data Factory
+|Azure Data Engineering|Spark 기반 데이터 처리 및 변환, 노트북 관리|Azure Synapce Analytics
+|Synapse Data Warehouse|확장성이 뛰어난 T-SQL 기반 클라우드 데이터 웨어하우스|Azure Synapse Analytics
+|Synapse Real-Time Analytics|시계열 데이터 및 대용량 스트리밍 데이터를 위한 분석|Azure Data Explorer
+|Data Science|기계 학습 모델 구축, 학습, 배포를 위한 도구|Azure Machine Learning
+|Power BI|데이터 시각화, 보고서 작성, 대시보드 공유|Power BI Service
+|===
+
+== 핵심 아키텍처 원칙: One Lake
+
+Fabric의 가장 혁신적인 부분은 모든 워크로드가 데이터를 저장하고 접근하는 **단일 통합 데이터 계층**입니다.
+
+* **OneLake**: Azure Data Lake Storage Gen2(ADLS Gen2)를 기반으로 구출된 **단일 논리 데이터 레이크**입니다. 조직의 모든 데이터가 한 곳에 저장되며, Fabric의 모든 서비스는 이 OneLake를 **기본 스토리지**로 사용합니다.
+* **Lakehouse**: OneLake 위에 구축된 구조로, 데이터 레이크의 유연성(비정형/반정형 데이터)과 데이터 웨어하우스의 구조 및 관리 기능(SQL 분석 엔드포인트)을 결합합니다.
+* **복사본 없음(Zero Copy)**: 서로 다른 워크로드(예: Data Engineering과 Data Warehouse)가 동일한 데이터 복사본을 공유하기 때문에, 데이터를 추출하거나 이동할 필요가 없어 단순성과 효율성이 극대화됩니다.
+
+== 주요 이점
+
+* **통합 및 단순화**: 모든 데이터 도구가 단일 SaaS 환경에서 작동하므로, 서로 다른 서비스 간의 복잡한 통합 및 관리 노력이 줄어듭니다.
+* **중앙 집중식 거버넌스**: 모든 데이터가 OneLake에 있기 때문에 보안, 거버넌스 및 규정 준수가 중앙에서 관리됩니다.
+* **T-SQL 분석 엔드포인트**: Lakehouse에 저장된 데이터에 대해 별도의 데이터 이동 없이 SQL 웨어하우스처럼 T-SQL을 사용하여 쿼리할 수 있습니다.
