@@ -1,0 +1,35 @@
+= Microsoft Azure Private Link
+
+Microsoft Azure Private Link는 Azure 서비스와 고객 소유의 서비스에 **가상 네트워크(Vnet)**의 개인 IP 주소를 통해 안전하게 접근할 수 있도록 하는 네트워킹 기술입니다.
+
+이를 통해 공용 인터넷을 완전히 우회하고 Azure 백본 네크워크를 통해서만 데이터를 전송함으로써 보안을 강화하고 데이터 유출 위험을 줄일 수 있습니다.
+
+== Private Link 핵심 구성요소
+
+Private Link 솔루션은 주로 두 가지 구성 요소로 이루어집니다.
+
+=== Private Endpoint
+
+* **역할**: 고객의 VNet 내부에 생성되는 네트워크 인터페이스입니다.
+* **특징**: 이 엔드포인트는 사용자의 VNet IP 주소 공간에서 **개인 IP 주소**를 할당받습니다.
+* **접근 방법**: 사용자는 이 개인 IP 주소를 통해 Azure PaaS 서비스(Azure Storage, Azure SQL Database, Microsoft Fabric) 또는 파트너/자체 서비스에 비공개로 접속할 수 있습니다.
+* **보안**: Private Endpoint로 향하는 트래픽은 **Azure 백본 네트워크**를 통해 이동하며, 공용 인터넷이 노출되지 않습니다.
+
+=== Private Link Service
+
+* **역할**: 고객이 **자신의 서비스(예: VNet 내부의 표준 부하 분산 장치 뒤에 있는 서비스)**를 Private Link를 통해 고객에게 안전하게 노출하고자 할 때 사용합니다.
+* **제공자 측 구성**: Private Link Service를 구성하면, 다른 VNet에 있는 소비자가 Private End Point를 생성하여 서비스에 접속할 수 있게 됩니다.
+
+== Private Link 작동 원리
+
+1. 연결 요청: 사용자가 VNet내의 VM이나 리소스에서 대상 PaaS 서비스의 **FQDN(정규화된 도메인 이름)**으로 접속을 시도합니다.
+2. DNS 확인: Azure Private DNS Zone이 구성되어 있다면, 해당 FQDN은 공용 IP 주소 대신 Private End Point에 할당된 개인 IP 주소로 확인(resolve) 됩니다.
+3. 내부 라우팅: 트래픽은 이 개인 IP 주소로 향하며, Azure VNet 및 Microsoft의 보안 백본 네트워크 내에서 안전하게 라우딩됩니다.
+4. 서비스 연결: Private Endpoint는 요청을 대상 Azure 서비스로 전달하며, 이 서비스는 요청을 승인된 Private Link 연결을 통해 수신합니다.
+
+== 주요 이점
+
+* 향상된 보안: 데이터가 공용 인터넷이 아닌 Microsoft의 프라이빗 네트워크를 통해 흐르기 때문에 서비스의 공격 표면(Attack Surface)이 크게 감소합니다.
+* 데이터 유출 방지: Private Endpoint는 특정 PaaS 리소스에만 연결되도록 구성되어, 승인되지 않은 다른 리소스로 데이터를 전송하는 데이터 유출 위험을 효과적으로 줄입니다.
+* 단순화된 네트워크 관리: 공용 IP를 차단하고 Private Endpoint에만 허용함으로써 네트워크 보안 그룹(NSG) 규칙과 라우팅 테이블 관리가 단순해집니다.
+* 온-프레미스 연결: ExpressRoute 또는 VPN Gateway를 통해 온-프레미스 네트워크를 Azure VNet에 연결하면, 온-프레미스에서도 Private Endpoint를 통해 Azure PaaS 서비스에 안전하게 접근할 수 있습니다.
