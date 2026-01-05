@@ -1,0 +1,85 @@
+= 암호화되어 작성된 SQL Function 복호화
+
+SQL Server에서 `WITH ENCRYPTION` 옵션을 사용하여 생성된 함수나 프로시저의 소스 코드는 일반적인 sp_helptext나 시스템 카탈로그 뷰(`sys.sql_modules`)를 통해 확인할 수 없습니다. 이를 추출하기 위해서는 관리자 권한과 DAC(Dedicated Administrator Connection)를 활용한 우회 방법이 필요합니다.
+
+== 준비 사항
+
+암호화된 객체를 복호화하여 추출하려면 다음 조건이 충족되어야 합니다.
+
+* **DAC(Dedicated Administrator Connection) 활성화** +
+SQL Server 서비스가 실행 중인 서버에서 직접 연결하거나, 원격 DAC가 허용되어 있어야 합니다.
+* **높은 권한** +
+CONTROL SERVER 권한 또는 sysadmin 역할이 필요합니다.
+
+== 복호화 원리
+
+SQL Server는 암호화된 본문을 `sys.sysobjvalues` 라는 시스템 테이블에 저장합니다. 이 테이블은 일반적인 연결로는 접근할 수 없으며 DAC를 통해서만 조회가 가능합니다. 복호화 스크립트는 보통 다음과 같은 논리로 작동합니다.
+
+* 대상 객체의 암호화된 바이너리 값을 가져옵니다.
+* 동일한 이름의 가짜 객체를 생성하여 암호화된 바이너리 값을 생성합니다.
+* XOR 연산을 통해 원본 텍스트를 복구합니다.
+
+== 추출 방법
+
+=== DAC를 통한 직접 실행
+
+직접 복호화 쿼리를 작성하는 것은 매우 복잡하므로, 널리 검증된 SQL 스크립트를 사용하는 것이 효율적입니다.
+
+1. DAC로 연결: +
+* SSMS에서 쿼리 창을 열 때 서버 이름 앞에 ADMIN:을 붙여 연결합니다. (예: ADMIN:ServerName)
+* 또는 단일 사용자 모드로 연결해야 할 수도 있습니다.
+2. 복호화 스크립트 실행 +
+많은 전문가들이 공유하는 'Decrypt SQL Server Objects' 스크립트를 사용합니다. 특정 함수의 이름을 입력하면 해당 함수의 본문을 복구하여 출력해 줍니다.
++
+아래는 스크립트의 예 입니다.
++
+[source, sql]
+----
+DECLARE @ObjectName NVARCHAR(4000) = 'YourFunctionName'; -- 여기에 복호화할 함수명 입력
+DECLARE @ObjectType NVARCHAR(10) = 'FN'; -- 함수(FN), 프로시저(P), 뷰(V) 등
+
+DECLARE @ContentP VARBINARY(MAX), @ContentA VARBINARY(MAX), @ContentE VARBINARY(MAX);
+DECLARE @ObjectNameID INT = OBJECT_ID(@ObjectName);
+
+-- 1. 원본 암호화 데이터 추출 (sys.sysobjvalues는 DAC에서만 접근 가능)
+SELECT @ContentE = imageval 
+FROM sys.sysobjvalues 
+WHERE objid = @ObjectNameID AND valclass = 1;
+
+-- 2. 가짜 객체 생성을 위한 더미 텍스트 준비
+DECLARE @DummyText NVARCHAR(MAX) = REPLICATE(N'-', LEN(@ContentE) / 2);
+DECLARE @AlterStatement NVARCHAR(MAX) = N'ALTER FUNCTION ' + @ObjectName + N'() RETURNS INT WITH ENCRYPTION AS BEGIN RETURN 1 END;';
+
+-- 3. 트랜잭션을 시작하여 가짜 객체로 대체했다가 롤백
+BEGIN TRANSACTION;
+    EXEC(@AlterStatement);
+    SELECT @ContentA = imageval FROM sys.sysobjvalues WHERE objid = @ObjectNameID AND valclass = 1;
+ROLLBACK TRANSACTION;
+
+-- 4. XOR 연산을 통한 복호화 로직
+DECLARE @FinalText NVARCHAR(MAX) = '';
+DECLARE @i INT = 1;
+
+-- 원본(@ContentE) XOR 가짜암호화(@ContentA) XOR 가짜평문(@AlterStatement)
+WHILE @i <= LEN(@ContentE) / 2
+BEGIN
+    SET @FinalText = @FinalText + NCHAR(
+        UNICODE(SUBSTRING(CAST(@ContentE AS NVARCHAR(MAX)), @i, 1)) ^
+        UNICODE(SUBSTRING(CAST(@ContentA AS NVARCHAR(MAX)), @i, 1)) ^
+        UNICODE(SUBSTRING(@AlterStatement, @i, 1))
+    );
+    SET @i = @i + 1;
+END
+
+-- 5. 결과 출력
+PRINT @FinalText;
+----
+
+=== 서드파티 도구 사용
+
+서드파티 도구를 사용할 수도 있습니다. 단, 마이크로소프트는 아래 도구들의 동작을 보증하지 않으며, 기술지원이 제공되지 않습니다.
+
+* **Redgate SQL Search** +
+일부 버전에서 복호화된 내용 확인을 지원합니다.
+* **ApexSQL Decrypt** +
+암호화된 객체를 한꺼번에 복호화해주는 무료 도구입니다. 가장 쉽고 안전한 방법입니다.
