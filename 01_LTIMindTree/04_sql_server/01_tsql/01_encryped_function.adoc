@@ -75,6 +75,78 @@ END
 PRINT @FinalText;
 ----
 
+Sample Source Code 2
+
+[source, sql]
+----
+DECLARE @TargetName NVARCHAR(MAX) = 'TestEncryptedFunction'; -- 대상 함수명
+DECLARE @ID INT = OBJECT_ID(@TargetName);
+DECLARE @Type NVARCHAR(2) = (SELECT type FROM sys.objects WHERE object_id = @ID);
+DECLARE @Encoded VARBINARY(MAX), @Blank VARBINARY(MAX), @Dummy NVARCHAR(MAX);
+DECLARE @ParamStr NVARCHAR(MAX) = N'';
+
+-- 1. 매개변수 추출 (대괄호를 씌워 특수문자/예약어 문제 방지)
+SELECT @ParamStr = ISNULL(STUFF((
+    SELECT ',' + QUOTENAME(p.name) + ' AS INT'
+    FROM sys.parameters p
+    WHERE p.object_id = @ID AND p.parameter_id > 0 -- 리턴 파라미터 제외
+    ORDER BY p.parameter_id
+    FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, ''), '');
+
+-- 2. 객체 타입별 Dummy 구문 생성 (AS 키워드 위치 정밀 조정)
+IF @Type IN ('FN', 'IF', 'TF')
+BEGIN
+    SET @Dummy = CASE 
+        WHEN @Type = 'FN' THEN N'ALTER FUNCTION ' + @TargetName + N'(' + @ParamStr + N') RETURNS INT WITH ENCRYPTION AS BEGIN RETURN 1 END'
+        WHEN @Type = 'TF' THEN N'ALTER FUNCTION ' + @TargetName + N'(' + @ParamStr + N') RETURNS @t TABLE(i INT) WITH ENCRYPTION AS BEGIN RETURN END'
+        WHEN @Type = 'IF' THEN N'ALTER FUNCTION ' + @TargetName + N'(' + @ParamStr + N') RETURNS TABLE WITH ENCRYPTION AS RETURN (SELECT 1 AS col)'
+    END;
+END
+ELSE
+BEGIN
+    PRINT '이 스크립트는 함수 전용입니다.';
+    RETURN;
+END
+
+-- 3. 원본 바이너리 추출
+SELECT @Encoded = imageval FROM sys.sysobjvalues WHERE objid = @ID AND valclass = 1;
+
+IF @Encoded IS NULL
+BEGIN
+    PRINT '데이터를 찾을 수 없습니다. (DAC 연결 및 객체명 확인 필요)';
+    RETURN;
+END
+
+-- 4. 길이 동기화
+DECLARE @TargetLen INT = DATALENGTH(@Encoded) / 2;
+IF LEN(@Dummy) < @TargetLen
+    SET @Dummy = @Dummy + REPLICATE(N'-', @TargetLen - LEN(@Dummy));
+ELSE
+    SET @Dummy = LEFT(@Dummy, @TargetLen);
+
+-- 5. 가짜 바이너리 생성 (트랜잭션)
+BEGIN TRANSACTION;
+    EXEC sp_executesql @Dummy;
+    SELECT @Blank = imageval FROM sys.sysobjvalues WHERE objid = @ID AND valclass = 1;
+ROLLBACK TRANSACTION;
+
+-- 6. XOR 연산
+DECLARE @Result NVARCHAR(MAX) = N'';
+DECLARE @i INT = 1;
+WHILE @i <= @TargetLen
+BEGIN
+    SET @Result = @Result + NCHAR(
+        UNICODE(SUBSTRING(CAST(@Encoded AS NVARCHAR(MAX)), @i, 1)) ^
+        UNICODE(SUBSTRING(CAST(@Blank AS NVARCHAR(MAX)), @i, 1)) ^
+        UNICODE(SUBSTRING(@Dummy, @i, 1))
+    );
+    SET @i = @i + 1;
+END
+
+-- 7. 결과 출력
+SELECT @Result AS [Decrypted_Source_Code];
+----
+
 === 서드파티 도구 사용
 
 서드파티 도구를 사용할 수도 있습니다. 단, 마이크로소프트는 아래 도구들의 동작을 보증하지 않으며, 기술지원이 제공되지 않습니다.
